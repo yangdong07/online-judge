@@ -1,8 +1,8 @@
 
 ## 省选/NOI-
 
-||#|Title|Algorithm Tags|Tags|Solution|Code|
-|:---:|---|:---:|:---:|:---:|:---:|:---:|
+|#|Title|Algorithm Tags|Tags|Solution|Code|
+|:---:|---|:---:|:---:|:---:|:---:|
 |P1081|[开车旅行](https://www.luogu.org/problemnew/show/P1081)|倍增|NOIp提高组,2012,高性能|||
 |P1084|[疫情控制](https://www.luogu.org/problemnew/show/P1084)💎|二分答案,倍增,排序,树形结构,贪心|NOIp提高组,2012,高性能|||
 |P1110|[[ZJOI2007]报表统计](https://www.luogu.org/problemnew/show/P1110)💎|Splay,二叉堆,平衡树,概率论,统计,线段树|各省省选,2007,浙江,高性能|||

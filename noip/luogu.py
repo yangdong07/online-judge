@@ -258,7 +258,7 @@ def get_tag_problems(problems):
 
 
 def generate_table(problems):
-    headers = ['', '#', 'Title', 'Algorithm Tags', 'Tags', 'Solution', 'Code']
+    headers = ['#', 'Title', 'Algorithm Tags', 'Tags', 'Solution', 'Code']
     markers = [':---:' for _ in headers]
     markers[1] = '---'   # Title
     headers = [''] + headers + ['']
@@ -271,7 +271,7 @@ def generate_table(problems):
     for problem in problems:
         index = problem['index']
         marked = '💎' if problem['marked'] else ''
-        problem_link = '[%s](%s)%s' % (problem['title'], problem['problem_link'], marked)
+        problem_link = '[%s](%s)%s' % (problem['title'].replace('|', '-'), problem['problem_link'], marked)
 
         algorithm_tags = problem.get('algorithm_tags', [])
         tags = [t for t in problem.get('tags', {}).values() if t not in algorithm_tags]

@@ -1,8 +1,8 @@
 
 ## NOI/NOI+/CTSC
 
-||#|Title|Algorithm Tags|Tags|Solution|Code|
-|:---:|---|:---:|:---:|:---:|:---:|:---:|
+|#|Title|Algorithm Tags|Tags|Solution|Code|
+|:---:|---|:---:|:---:|:---:|:---:|
 |P1117|[[NOI2016]优秀的拆分](https://www.luogu.org/problemnew/show/P1117)💎|后缀数组,SA,字符串,枚举,暴力|NOI系列,2016,O2优化,高性能|||
 |P1173|[[NOI2016]网格](https://www.luogu.org/problemnew/show/P1173)💎|枚举,暴力,贪心,高精|NOI系列,2016,O2优化,高性能|||
 |P1232|[[NOI2013]树的计数](https://www.luogu.org/problemnew/show/P1232)💎|广度优先搜索,BFS,深度优先搜索,DFS,递推|NOI系列,2013|||
