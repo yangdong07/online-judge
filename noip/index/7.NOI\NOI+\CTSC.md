@@ -3,148 +3,148 @@
 
 |#|Title|Algorithm Tags|Tags|Solution|Code|
 |:---:|---|:---:|:---:|:---:|:---:|
-|P1117|[[NOI2016]优秀的拆分](https://www.luogu.org/problemnew/show/P1117)💎|后缀数组,SA,字符串,枚举,暴力|NOI系列,2016,O2优化,高性能|||
-|P1173|[[NOI2016]网格](https://www.luogu.org/problemnew/show/P1173)💎|枚举,暴力,贪心,高精|NOI系列,2016,O2优化,高性能|||
-|P1232|[[NOI2013]树的计数](https://www.luogu.org/problemnew/show/P1232)💎|广度优先搜索,BFS,深度优先搜索,DFS,递推|NOI系列,2013|||
+|P1117|⭐️[[NOI2016]优秀的拆分](https://www.luogu.org/problemnew/show/P1117)|后缀数组,SA,字符串,枚举,暴力|NOI系列,2016,O2优化,高性能|||
+|P1173|⭐️[[NOI2016]网格](https://www.luogu.org/problemnew/show/P1173)|枚举,暴力,贪心,高精|NOI系列,2016,O2优化,高性能|||
+|P1232|⭐️[[NOI2013]树的计数](https://www.luogu.org/problemnew/show/P1232)|广度优先搜索,BFS,深度优先搜索,DFS,递推|NOI系列,2013|||
 |P1254|[扇区填数](https://www.luogu.org/problemnew/show/P1254)|搜索,贪心||||
 |P1299|[切孔机](https://www.luogu.org/problemnew/show/P1299)|搜索||||
-|P1398|[[NOI2013]书法家](https://www.luogu.org/problemnew/show/P1398)💎|动态规划,动规,dp,枚举,暴力,骗分|NOI系列,2013,高性能|||
-|P1399|[[NOI2013]快餐店](https://www.luogu.org/problemnew/show/P1399)💎|深度优先搜索,DFS,线段树,递推|NOI系列,2013,高性能|||
+|P1398|⭐️[[NOI2013]书法家](https://www.luogu.org/problemnew/show/P1398)|动态规划,动规,dp,枚举,暴力,骗分|NOI系列,2013,高性能|||
+|P1399|⭐️[[NOI2013]快餐店](https://www.luogu.org/problemnew/show/P1399)|深度优先搜索,DFS,线段树,递推|NOI系列,2013,高性能|||
 |P1501|[[国家集训队]Tree II](https://www.luogu.org/problemnew/show/P1501)|Link-Cut Tree,LCT|WC/CTSC/集训队|||
-|P1587|[[NOI2016]循环之美](https://www.luogu.org/problemnew/show/P1587)💎|数论,数学|NOI系列,2016,O2优化,高性能|||
-|P1721|[[NOI2016]国王饮水记](https://www.luogu.org/problemnew/show/P1721)💎|动态规划,动规,dp,斜率优化|NOI系列,2016,Special Judge|||
-|P1737|[[NOI2016]旷野大计算](https://www.luogu.org/problemnew/show/P1737)💎|数论,数学|NOI系列,2016,Special Judge,提交答案|||
-|P1756|[[NOI2009]描边](https://www.luogu.org/problemnew/show/P1756)💎|二分图,计算几何,高精|NOI系列,2009,Special Judge,提交答案|||
+|P1587|⭐️[[NOI2016]循环之美](https://www.luogu.org/problemnew/show/P1587)|数论,数学|NOI系列,2016,O2优化,高性能|||
+|P1721|⭐️[[NOI2016]国王饮水记](https://www.luogu.org/problemnew/show/P1721)|动态规划,动规,dp,斜率优化|NOI系列,2016,Special Judge|||
+|P1737|⭐️[[NOI2016]旷野大计算](https://www.luogu.org/problemnew/show/P1737)|数论,数学|NOI系列,2016,Special Judge,提交答案|||
+|P1756|⭐️[[NOI2009]描边](https://www.luogu.org/problemnew/show/P1756)|二分图,计算几何,高精|NOI系列,2009,Special Judge,提交答案|||
 |P1763|[蓄水池](https://www.luogu.org/problemnew/show/P1763)|动态规划,动规,dp,搜索,状态压缩,状压,记忆化搜索|高性能|||
 |P1852|[[国家集训队]跳跳棋](https://www.luogu.org/problemnew/show/P1852)|二分答案,最近公共祖先,LCA|清华集训|||
-|P1912|[[NOI2009]诗人小G](https://www.luogu.org/problemnew/show/P1912)💎|动态规划,动规,dp,栈,贪心|NOI系列,2009,Special Judge|||
-|P1915|[[NOI2010]成长快乐](https://www.luogu.org/problemnew/show/P1915)💎|动态规划,动规,dp,贪心,随机贪心,随机化|NOI系列,2010,Special Judge,提交答案|||
+|P1912|⭐️[[NOI2009]诗人小G](https://www.luogu.org/problemnew/show/P1912)|动态规划,动规,dp,栈,贪心|NOI系列,2009,Special Judge|||
+|P1915|⭐️[[NOI2010]成长快乐](https://www.luogu.org/problemnew/show/P1915)|动态规划,动规,dp,贪心,随机贪心,随机化|NOI系列,2010,Special Judge,提交答案|||
 |P1921|[赌博游戏](https://www.luogu.org/problemnew/show/P1921)|数论,数学||||
 |P1924|[万花丛中番外之HR家的海豹（误）](https://www.luogu.org/problemnew/show/P1924)|动态规划,动规,dp||||
-|P1973|[[NOI2011]Noi嘉年华](https://www.luogu.org/problemnew/show/P1973)💎|动态规划,动规,dp,单调队列|NOI系列,2011,Special Judge|||
-|P2020|[[NOI2011]兔农](https://www.luogu.org/problemnew/show/P2020)💎|数论,数学,斐波那契,Fibonacci,逆元|NOI系列,2011,高性能|||
-|P2081|[[NOI2012]迷失游乐园](https://www.luogu.org/problemnew/show/P2081)💎|动态规划,动规,dp,图论,期望,递推|NOI系列,2012,Special Judge|||
-|P2086|[[NOI2012]魔幻棋盘](https://www.luogu.org/problemnew/show/P2086)💎|二维线段树,最大公约数,gcd,线段树|NOI系列,2012,高性能|||
-|P2109|[[NOI2007]生成树计数](https://www.luogu.org/problemnew/show/P2109)💎||NOI系列,2007,O2优化,高性能|||
-|P2150|[[NOI2015]寿司晚宴](https://www.luogu.org/problemnew/show/P2150)💎|动态规划,动规,dp,数论,数学,状态压缩,状压,素数判断,质数,筛法|NOI系列,2015,高性能|||
+|P1973|⭐️[[NOI2011]Noi嘉年华](https://www.luogu.org/problemnew/show/P1973)|动态规划,动规,dp,单调队列|NOI系列,2011,Special Judge|||
+|P2020|⭐️[[NOI2011]兔农](https://www.luogu.org/problemnew/show/P2020)|数论,数学,斐波那契,Fibonacci,逆元|NOI系列,2011,高性能|||
+|P2081|⭐️[[NOI2012]迷失游乐园](https://www.luogu.org/problemnew/show/P2081)|动态规划,动规,dp,图论,期望,递推|NOI系列,2012,Special Judge|||
+|P2086|⭐️[[NOI2012]魔幻棋盘](https://www.luogu.org/problemnew/show/P2086)|二维线段树,最大公约数,gcd,线段树|NOI系列,2012,高性能|||
+|P2109|⭐️[[NOI2007]生成树计数](https://www.luogu.org/problemnew/show/P2109)||NOI系列,2007,O2优化,高性能|||
+|P2150|⭐️[[NOI2015]寿司晚宴](https://www.luogu.org/problemnew/show/P2150)|动态规划,动规,dp,数论,数学,状态压缩,状压,素数判断,质数,筛法|NOI系列,2015,高性能|||
 |P2166|[Gty的超级妹子树](https://www.luogu.org/problemnew/show/P2166)|平衡树|高性能|||
-|P2178|[[NOI2015]品酒大会](https://www.luogu.org/problemnew/show/P2178)💎|后缀数组,SA,并查集,概率论,统计|NOI系列,2015,高性能|||
-|P2179|[[NOI2012]骑行川藏](https://www.luogu.org/problemnew/show/P2179)💎|向量,数论,数学,构造|NOI系列,2012,Special Judge|||
+|P2178|⭐️[[NOI2015]品酒大会](https://www.luogu.org/problemnew/show/P2178)|后缀数组,SA,并查集,概率论,统计|NOI系列,2015,高性能|||
+|P2179|⭐️[[NOI2012]骑行川藏](https://www.luogu.org/problemnew/show/P2179)|向量,数论,数学,构造|NOI系列,2012,Special Judge|||
 |P2183|[[国家集训队]礼物](https://www.luogu.org/problemnew/show/P2183)|卢卡斯,Lucas,同余,中国剩余定理,数论,数学|WC/CTSC/集训队|||
 |P2210|[Haywire](https://www.luogu.org/problemnew/show/P2210)|搜索|USACO|||
-|P2248|[分段](https://www.luogu.org/problemnew/show/P2248)💎||O2优化,高性能|||
-|P2287|[[HNOI2004]最佳包裹](https://www.luogu.org/problemnew/show/P2287)💎|凸包,动态规划,动规,dp,递推|各省省选,2004,湖南|||
-|P2304|[[NOI2015]小园丁与老司机](https://www.luogu.org/problemnew/show/P2304)💎|动态规划,动规,dp,图的建立,建图,网络流|NOI系列,2015,Special Judge|||
-|P2305|[[NOI2014]购票](https://www.luogu.org/problemnew/show/P2305)💎|分治,图论,斜率优化,线段树|NOI系列,2014|||
-|P2314|[[HNOI2005]木梳](https://www.luogu.org/problemnew/show/P2314)💎||各省省选,2005,湖南,高性能|||
-|P2478|[[SDOI2010]城市规划](https://www.luogu.org/problemnew/show/P2478)💎||各省省选,2010,山东,高性能|||
-|P2481|[[SDOI2010]代码拍卖会](https://www.luogu.org/problemnew/show/P2481)💎|数位动规,数位dp,组合数学|各省省选,2010,山东,高性能|||
-|P2482|[[SDOI2010]猪国杀](https://www.luogu.org/problemnew/show/P2482)💎|AOE,字符串,模拟|各省省选,2010,山东|||
-|P2483|[【模板】k短路（[SDOI2010]魔法猪学院）](https://www.luogu.org/problemnew/show/P2483)💎|A*算法,K短路,最短路|各省省选,2010,山东,高性能|||
-|P2494|[[SDOI2011]保密](https://www.luogu.org/problemnew/show/P2494)💎|SPFA,最大流,线段树|各省省选,2011,山东,高性能|||
-|P2538|[[SCOI2008]城堡](https://www.luogu.org/problemnew/show/P2538)💎|动态规划,动规,dp,搜索,期望|各省省选,2008,四川,高性能|||
-|P2586|[[ZJOI2008]杀蚂蚁](https://www.luogu.org/problemnew/show/P2586)💎|模拟|各省省选,2008,浙江,高性能|||
-|P2605|[[ZJOI2010]基站选址](https://www.luogu.org/problemnew/show/P2605)💎|动态规划,动规,dp,线段树|各省省选,2010,浙江,高性能|||
-|P2612|[[ZJOI2012]波浪](https://www.luogu.org/problemnew/show/P2612)💎|Splay,拓扑排序|各省省选,2012,浙江,高性能|||
+|P2248|⭐️[分段](https://www.luogu.org/problemnew/show/P2248)||O2优化,高性能|||
+|P2287|⭐️[[HNOI2004]最佳包裹](https://www.luogu.org/problemnew/show/P2287)|凸包,动态规划,动规,dp,递推|各省省选,2004,湖南|||
+|P2304|⭐️[[NOI2015]小园丁与老司机](https://www.luogu.org/problemnew/show/P2304)|动态规划,动规,dp,图的建立,建图,网络流|NOI系列,2015,Special Judge|||
+|P2305|⭐️[[NOI2014]购票](https://www.luogu.org/problemnew/show/P2305)|分治,图论,斜率优化,线段树|NOI系列,2014|||
+|P2314|⭐️[[HNOI2005]木梳](https://www.luogu.org/problemnew/show/P2314)||各省省选,2005,湖南,高性能|||
+|P2478|⭐️[[SDOI2010]城市规划](https://www.luogu.org/problemnew/show/P2478)||各省省选,2010,山东,高性能|||
+|P2481|⭐️[[SDOI2010]代码拍卖会](https://www.luogu.org/problemnew/show/P2481)|数位动规,数位dp,组合数学|各省省选,2010,山东,高性能|||
+|P2482|⭐️[[SDOI2010]猪国杀](https://www.luogu.org/problemnew/show/P2482)|AOE,字符串,模拟|各省省选,2010,山东|||
+|P2483|⭐️[【模板】k短路（[SDOI2010]魔法猪学院）](https://www.luogu.org/problemnew/show/P2483)|A*算法,K短路,最短路|各省省选,2010,山东,高性能|||
+|P2494|⭐️[[SDOI2011]保密](https://www.luogu.org/problemnew/show/P2494)|SPFA,最大流,线段树|各省省选,2011,山东,高性能|||
+|P2538|⭐️[[SCOI2008]城堡](https://www.luogu.org/problemnew/show/P2538)|动态规划,动规,dp,搜索,期望|各省省选,2008,四川,高性能|||
+|P2586|⭐️[[ZJOI2008]杀蚂蚁](https://www.luogu.org/problemnew/show/P2586)|模拟|各省省选,2008,浙江,高性能|||
+|P2605|⭐️[[ZJOI2010]基站选址](https://www.luogu.org/problemnew/show/P2605)|动态规划,动规,dp,线段树|各省省选,2010,浙江,高性能|||
+|P2612|⭐️[[ZJOI2012]波浪](https://www.luogu.org/problemnew/show/P2612)|Splay,拓扑排序|各省省选,2012,浙江,高性能|||
 |P2620|[虫洞](https://www.luogu.org/problemnew/show/P2620)|动态规划,动规,dp,图论||||
 |P2664|[树上游戏](https://www.luogu.org/problemnew/show/P2664)|点分治|高性能|||
 |P2682|[土豆田](https://www.luogu.org/problemnew/show/P2682)||Special Judge,提交答案|||
-|P2703|[[NOI2006]千年虫](https://www.luogu.org/problemnew/show/P2703)💎|动态规划,动规,dp,枚举,暴力,贪心|NOI系列,2006,高性能|||
-|P2775|[机器人路径规划问题](https://www.luogu.org/problemnew/show/P2775)💎|网络流|网络流24题,O2优化|||
+|P2703|⭐️[[NOI2006]千年虫](https://www.luogu.org/problemnew/show/P2703)|动态规划,动规,dp,枚举,暴力,贪心|NOI系列,2006,高性能|||
+|P2775|⭐️[机器人路径规划问题](https://www.luogu.org/problemnew/show/P2775)|网络流|网络流24题,O2优化|||
 |P2783|[有机化学之神偶尔会做作弊](https://www.luogu.org/problemnew/show/P2783)|图论,强连通分量,缩点,最近公共祖先,LCA||||
 |P2839|[[国家集训队]middle](https://www.luogu.org/problemnew/show/P2839)|主席树,二分答案|WC/CTSC/集训队|||
-|P3006|[[USACO11JAN]瓶颈Bottleneck](https://www.luogu.org/problemnew/show/P3006)💎|最短路,树链剖分,树剖,线段树|USACO,2011,高性能|||
-|P3160|[[CQOI2012]局部极小值](https://www.luogu.org/problemnew/show/P3160)💎|动态规划,动规,dp,容斥,状态压缩,状压|2012,重庆|||
-|P3161|[[CQOI2012]模拟工厂](https://www.luogu.org/problemnew/show/P3161)💎|模拟,贪心|2012,重庆,高性能|||
+|P3006|⭐️[[USACO11JAN]瓶颈Bottleneck](https://www.luogu.org/problemnew/show/P3006)|最短路,树链剖分,树剖,线段树|USACO,2011,高性能|||
+|P3160|⭐️[[CQOI2012]局部极小值](https://www.luogu.org/problemnew/show/P3160)|动态规划,动规,dp,容斥,状态压缩,状压|2012,重庆|||
+|P3161|⭐️[[CQOI2012]模拟工厂](https://www.luogu.org/problemnew/show/P3161)|模拟,贪心|2012,重庆,高性能|||
 |P3175|[[HAOI2015]按位或](https://www.luogu.org/problemnew/show/P3175)|容斥,集合论|2015,河南,Special Judge,高性能|||
-|P3179|[[HAOI2015]数组游戏](https://www.luogu.org/problemnew/show/P3179)💎|动态规划,动规,dp|2015,河南,高性能|||
-|P3186|[[HNOI2007]所罗门的咒语](https://www.luogu.org/problemnew/show/P3186)💎||2007,湖南,高性能|||
-|P3207|[[HNOI2010]物品调度](https://www.luogu.org/problemnew/show/P3207)💎|并查集,置换|2010,湖南,高性能|||
-|P3208|[[HNOI2010]矩阵](https://www.luogu.org/problemnew/show/P3208)💎|剪枝,构造,枚举,暴力|2010,湖南|||
-|P3210|[[HNOI2010]取石头游戏](https://www.luogu.org/problemnew/show/P3210)💎|博弈论,贪心|2010,湖南,高性能|||
-|P3214|[[HNOI2011]卡农](https://www.luogu.org/problemnew/show/P3214)💎|数论,数学,组合数学,逆元|2011,湖南|||
-|P3215|[[HNOI2011]括号修复 / [JSOI2011]括号序列](https://www.luogu.org/problemnew/show/P3215)💎|Splay,字符串|2011,湖南,高性能|||
-|P3222|[[HNOI2012]射箭](https://www.luogu.org/problemnew/show/P3222)💎|二分答案,凸包,半平面相交,半平面交|2012,湖南,高性能|||
-|P3229|[[HNOI2013]旅行](https://www.luogu.org/problemnew/show/P3229)💎|单调队列,数论,数学,高斯消元|2013,湖南,高性能|||
-|P3234|[[HNOI2014]抄卡组](https://www.luogu.org/problemnew/show/P3234)💎|前缀和,哈希,HASH,字符串|2014,湖南,高性能|||
-|P3235|[[HNOI2014]江南乐](https://www.luogu.org/problemnew/show/P3235)💎|Nim游戏,递推|2014,湖南,O2优化,高性能|||
-|P3236|[[HNOI2014]画框](https://www.luogu.org/problemnew/show/P3236)💎|分治,叉积,生成树|2014,湖南,高性能|||
-|P3238|[[HNOI2014]道路堵塞](https://www.luogu.org/problemnew/show/P3238)💎|SPFA,平衡树,最短路|2014,湖南,高性能|||
-|P3241|[[HNOI2015]开店](https://www.luogu.org/problemnew/show/P3241)💎|分治,动态树,最近公共祖先,LCA|2015,湖南,高性能|||
-|P3242|[[HNOI2015]接水果](https://www.luogu.org/problemnew/show/P3242)💎|最近公共祖先,LCA,树套树,深度优先搜索,DFS|2015,湖南,高性能|||
-|P3247|[[HNOI2016]最小公倍数](https://www.luogu.org/problemnew/show/P3247)💎|并查集,数论,数学|2016,湖南,高性能|||
-|P3248|[[HNOI2016]树](https://www.luogu.org/problemnew/show/P3248)💎|主席树,最近公共祖先,LCA,树套树|2016,湖南,高性能|||
-|P3249|[[HNOI2016]矿区](https://www.luogu.org/problemnew/show/P3249)💎|枚举,暴力,深度优先搜索,DFS,生成树|2016,湖南,高性能|||
-|P3269|[[JLOI2016]字符串覆盖](https://www.luogu.org/problemnew/show/P3269)💎|字符串,矩阵乘法|2016,吉林,高性能|||
-|P3285|[[SCOI2014]方伯伯的OJ](https://www.luogu.org/problemnew/show/P3285)💎|Treap,平衡树,线段树|2014,四川,高性能|||
-|P3290|[[SCOI2016]围棋](https://www.luogu.org/problemnew/show/P3290)💎|KMP,动态规划,动规,dp|2016,四川,高性能|||
-|P3296|[[SDOI2013]刺客信条](https://www.luogu.org/problemnew/show/P3296)💎|动态规划,动规,dp,哈希,HASH,费用流|2013,山东,高性能|||
-|P3297|[[SDOI2013]逃考](https://www.luogu.org/problemnew/show/P3297)💎|半平面相交,半平面交,计算几何|各省省选,2013,山东,高性能|||
-|P3298|[[SDOI2013]泉](https://www.luogu.org/problemnew/show/P3298)💎|哈希,HASH,容斥|2013,山东,高性能|||
-|P3300|[[SDOI2013]城市规划](https://www.luogu.org/problemnew/show/P3300)💎|并查集,线段树|2013,山东,高性能|||
-|P3303|[[SDOI2013]淘金](https://www.luogu.org/problemnew/show/P3303)💎|动态规划,动规,dp,数位动规,数位dp|2013,山东,高性能|||
-|P3307|[[SDOI2013]项链](https://www.luogu.org/problemnew/show/P3307)💎|数论,数学,最大公约数,gcd,逆元|2013,山东,高性能|||
-|P3308|[[SDOI2014]LIS](https://www.luogu.org/problemnew/show/P3308)💎|最大流,最小割,网络流|2014,山东,高性能|||
-|P3318|[[SDOI2015]双旋转字符串](https://www.luogu.org/problemnew/show/P3318)💎|数论,数学,概率论,统计,深度优先搜索,DFS|2015,山东,高性能|||
-|P3326|[[SDOI2015]立体图](https://www.luogu.org/problemnew/show/P3326)💎|枚举,暴力,骗分|2015,山东,高性能|||
-|P3328|[[SDOI2015]音质检测](https://www.luogu.org/problemnew/show/P3328)💎|矩阵乘法,线段树|2015,山东,高性能|||
-|P3334|[[ZJOI2013]抛硬币](https://www.luogu.org/problemnew/show/P3334)💎||2013,浙江,高性能|||
-|P3336|[[ZJOI2013]话旧](https://www.luogu.org/problemnew/show/P3336)💎|树套树,树状数组,线段树|2013,浙江,高性能|||
-|P3343|[[ZJOI2015]地震后的幻想乡](https://www.luogu.org/problemnew/show/P3343)💎|期望,状态压缩,状压,积分|2015,浙江|||
-|P3348|[[ZJOI2016]大森林](https://www.luogu.org/problemnew/show/P3348)💎||2016,浙江,高性能|||
-|P3453|[[POI2007]DRZ-Trees](https://www.luogu.org/problemnew/show/P3453)💎|线段树|POI,2007,高性能|||
-|P3473|[[POI2008]UCI-The Great Escape](https://www.luogu.org/problemnew/show/P3473)💎|动态规划,动规,dp|POI,2008,高性能|||
-|P3504|[[POI2010]OWC-Sheep](https://www.luogu.org/problemnew/show/P3504)💎|动态规划,动规,dp|POI,2010,高性能|||
-|P3543|[[POI2012]WYR-Leveling Ground](https://www.luogu.org/problemnew/show/P3543)💎|动态规划,动规,dp,模拟,贪心|POI,2012,高性能|||
-|P3544|[[POI2012]BEZ-Minimalist Security](https://www.luogu.org/problemnew/show/P3544)💎|广度优先搜索,BFS|POI,2012,高性能|||
-|P3571|[[POI2014]SUP-Supercomputer](https://www.luogu.org/problemnew/show/P3571)💎|凸包,斜率优化|POI,2014,高性能|||
-|P3583|[[POI2015]KWA](https://www.luogu.org/problemnew/show/P3583)💎|数论,数学|POI,2015,高性能|||
-|P3587|[[POI2015]POD](https://www.luogu.org/problemnew/show/P3587)💎|单调队列,哈希,HASH|POI,2015,高性能|||
-|P3597|[[POI2015]WYC](https://www.luogu.org/problemnew/show/P3597)💎|矩阵乘法|POI,2015,高性能|||
-|P3613|[睡觉困难综合征](https://www.luogu.org/problemnew/show/P3613)💎|Link-Cut Tree,LCT,树链剖分,树剖,贪心|洛谷原创,O2优化,高性能|||
-|P3632|[[APIO2011]寻路](https://www.luogu.org/problemnew/show/P3632)💎|SPFA,最短路,模拟|APIO,2011,高性能|||
-|P3642|[[APIO2016]烟火表演](https://www.luogu.org/problemnew/show/P3642)💎|凸包,左偏树|APIO,2016,高性能|||
-|P3643|[[APIO2016]划艇](https://www.luogu.org/problemnew/show/P3643)💎||APIO,2016,新云端|||
-|P3676|[小清新数据结构题](https://www.luogu.org/problemnew/show/P3676)💎|Link-Cut Tree,LCT,树链剖分,树剖,概率论,统计,点分治|洛谷原创,O2优化,高性能|||
-|P3679|[[CERC2016]二分毯 Bipartite Blanket](https://www.luogu.org/problemnew/show/P3679)💎||高性能|||
-|P3684|[[CERC2016]机棚障碍 Hangar Hurdles](https://www.luogu.org/problemnew/show/P3684)💎||2016,高性能|||
+|P3179|⭐️[[HAOI2015]数组游戏](https://www.luogu.org/problemnew/show/P3179)|动态规划,动规,dp|2015,河南,高性能|||
+|P3186|⭐️[[HNOI2007]所罗门的咒语](https://www.luogu.org/problemnew/show/P3186)||2007,湖南,高性能|||
+|P3207|⭐️[[HNOI2010]物品调度](https://www.luogu.org/problemnew/show/P3207)|并查集,置换|2010,湖南,高性能|||
+|P3208|⭐️[[HNOI2010]矩阵](https://www.luogu.org/problemnew/show/P3208)|剪枝,构造,枚举,暴力|2010,湖南|||
+|P3210|⭐️[[HNOI2010]取石头游戏](https://www.luogu.org/problemnew/show/P3210)|博弈论,贪心|2010,湖南,高性能|||
+|P3214|⭐️[[HNOI2011]卡农](https://www.luogu.org/problemnew/show/P3214)|数论,数学,组合数学,逆元|2011,湖南|||
+|P3215|⭐️[[HNOI2011]括号修复 / [JSOI2011]括号序列](https://www.luogu.org/problemnew/show/P3215)|Splay,字符串|2011,湖南,高性能|||
+|P3222|⭐️[[HNOI2012]射箭](https://www.luogu.org/problemnew/show/P3222)|二分答案,凸包,半平面相交,半平面交|2012,湖南,高性能|||
+|P3229|⭐️[[HNOI2013]旅行](https://www.luogu.org/problemnew/show/P3229)|单调队列,数论,数学,高斯消元|2013,湖南,高性能|||
+|P3234|⭐️[[HNOI2014]抄卡组](https://www.luogu.org/problemnew/show/P3234)|前缀和,哈希,HASH,字符串|2014,湖南,高性能|||
+|P3235|⭐️[[HNOI2014]江南乐](https://www.luogu.org/problemnew/show/P3235)|Nim游戏,递推|2014,湖南,O2优化,高性能|||
+|P3236|⭐️[[HNOI2014]画框](https://www.luogu.org/problemnew/show/P3236)|分治,叉积,生成树|2014,湖南,高性能|||
+|P3238|⭐️[[HNOI2014]道路堵塞](https://www.luogu.org/problemnew/show/P3238)|SPFA,平衡树,最短路|2014,湖南,高性能|||
+|P3241|⭐️[[HNOI2015]开店](https://www.luogu.org/problemnew/show/P3241)|分治,动态树,最近公共祖先,LCA|2015,湖南,高性能|||
+|P3242|⭐️[[HNOI2015]接水果](https://www.luogu.org/problemnew/show/P3242)|最近公共祖先,LCA,树套树,深度优先搜索,DFS|2015,湖南,高性能|||
+|P3247|⭐️[[HNOI2016]最小公倍数](https://www.luogu.org/problemnew/show/P3247)|并查集,数论,数学|2016,湖南,高性能|||
+|P3248|⭐️[[HNOI2016]树](https://www.luogu.org/problemnew/show/P3248)|主席树,最近公共祖先,LCA,树套树|2016,湖南,高性能|||
+|P3249|⭐️[[HNOI2016]矿区](https://www.luogu.org/problemnew/show/P3249)|枚举,暴力,深度优先搜索,DFS,生成树|2016,湖南,高性能|||
+|P3269|⭐️[[JLOI2016]字符串覆盖](https://www.luogu.org/problemnew/show/P3269)|字符串,矩阵乘法|2016,吉林,高性能|||
+|P3285|⭐️[[SCOI2014]方伯伯的OJ](https://www.luogu.org/problemnew/show/P3285)|Treap,平衡树,线段树|2014,四川,高性能|||
+|P3290|⭐️[[SCOI2016]围棋](https://www.luogu.org/problemnew/show/P3290)|KMP,动态规划,动规,dp|2016,四川,高性能|||
+|P3296|⭐️[[SDOI2013]刺客信条](https://www.luogu.org/problemnew/show/P3296)|动态规划,动规,dp,哈希,HASH,费用流|2013,山东,高性能|||
+|P3297|⭐️[[SDOI2013]逃考](https://www.luogu.org/problemnew/show/P3297)|半平面相交,半平面交,计算几何|各省省选,2013,山东,高性能|||
+|P3298|⭐️[[SDOI2013]泉](https://www.luogu.org/problemnew/show/P3298)|哈希,HASH,容斥|2013,山东,高性能|||
+|P3300|⭐️[[SDOI2013]城市规划](https://www.luogu.org/problemnew/show/P3300)|并查集,线段树|2013,山东,高性能|||
+|P3303|⭐️[[SDOI2013]淘金](https://www.luogu.org/problemnew/show/P3303)|动态规划,动规,dp,数位动规,数位dp|2013,山东,高性能|||
+|P3307|⭐️[[SDOI2013]项链](https://www.luogu.org/problemnew/show/P3307)|数论,数学,最大公约数,gcd,逆元|2013,山东,高性能|||
+|P3308|⭐️[[SDOI2014]LIS](https://www.luogu.org/problemnew/show/P3308)|最大流,最小割,网络流|2014,山东,高性能|||
+|P3318|⭐️[[SDOI2015]双旋转字符串](https://www.luogu.org/problemnew/show/P3318)|数论,数学,概率论,统计,深度优先搜索,DFS|2015,山东,高性能|||
+|P3326|⭐️[[SDOI2015]立体图](https://www.luogu.org/problemnew/show/P3326)|枚举,暴力,骗分|2015,山东,高性能|||
+|P3328|⭐️[[SDOI2015]音质检测](https://www.luogu.org/problemnew/show/P3328)|矩阵乘法,线段树|2015,山东,高性能|||
+|P3334|⭐️[[ZJOI2013]抛硬币](https://www.luogu.org/problemnew/show/P3334)||2013,浙江,高性能|||
+|P3336|⭐️[[ZJOI2013]话旧](https://www.luogu.org/problemnew/show/P3336)|树套树,树状数组,线段树|2013,浙江,高性能|||
+|P3343|⭐️[[ZJOI2015]地震后的幻想乡](https://www.luogu.org/problemnew/show/P3343)|期望,状态压缩,状压,积分|2015,浙江|||
+|P3348|⭐️[[ZJOI2016]大森林](https://www.luogu.org/problemnew/show/P3348)||2016,浙江,高性能|||
+|P3453|⭐️[[POI2007]DRZ-Trees](https://www.luogu.org/problemnew/show/P3453)|线段树|POI,2007,高性能|||
+|P3473|⭐️[[POI2008]UCI-The Great Escape](https://www.luogu.org/problemnew/show/P3473)|动态规划,动规,dp|POI,2008,高性能|||
+|P3504|⭐️[[POI2010]OWC-Sheep](https://www.luogu.org/problemnew/show/P3504)|动态规划,动规,dp|POI,2010,高性能|||
+|P3543|⭐️[[POI2012]WYR-Leveling Ground](https://www.luogu.org/problemnew/show/P3543)|动态规划,动规,dp,模拟,贪心|POI,2012,高性能|||
+|P3544|⭐️[[POI2012]BEZ-Minimalist Security](https://www.luogu.org/problemnew/show/P3544)|广度优先搜索,BFS|POI,2012,高性能|||
+|P3571|⭐️[[POI2014]SUP-Supercomputer](https://www.luogu.org/problemnew/show/P3571)|凸包,斜率优化|POI,2014,高性能|||
+|P3583|⭐️[[POI2015]KWA](https://www.luogu.org/problemnew/show/P3583)|数论,数学|POI,2015,高性能|||
+|P3587|⭐️[[POI2015]POD](https://www.luogu.org/problemnew/show/P3587)|单调队列,哈希,HASH|POI,2015,高性能|||
+|P3597|⭐️[[POI2015]WYC](https://www.luogu.org/problemnew/show/P3597)|矩阵乘法|POI,2015,高性能|||
+|P3613|⭐️[睡觉困难综合征](https://www.luogu.org/problemnew/show/P3613)|Link-Cut Tree,LCT,树链剖分,树剖,贪心|洛谷原创,O2优化,高性能|||
+|P3632|⭐️[[APIO2011]寻路](https://www.luogu.org/problemnew/show/P3632)|SPFA,最短路,模拟|APIO,2011,高性能|||
+|P3642|⭐️[[APIO2016]烟火表演](https://www.luogu.org/problemnew/show/P3642)|凸包,左偏树|APIO,2016,高性能|||
+|P3643|⭐️[[APIO2016]划艇](https://www.luogu.org/problemnew/show/P3643)||APIO,2016,新云端|||
+|P3676|⭐️[小清新数据结构题](https://www.luogu.org/problemnew/show/P3676)|Link-Cut Tree,LCT,树链剖分,树剖,概率论,统计,点分治|洛谷原创,O2优化,高性能|||
+|P3679|⭐️[[CERC2016]二分毯 Bipartite Blanket](https://www.luogu.org/problemnew/show/P3679)||高性能|||
+|P3684|⭐️[[CERC2016]机棚障碍 Hangar Hurdles](https://www.luogu.org/problemnew/show/P3684)||2016,高性能|||
 |P3701|[「伪模板」主席树](https://www.luogu.org/problemnew/show/P3701)|图的建立,建图,字符串,最大流,网络流|洛谷原创,高性能|||
-|P3704|[[SDOI2017]数字表格](https://www.luogu.org/problemnew/show/P3704)💎|块状链表,块状数组,分块,枚举,暴力,莫比乌斯反演|各省省选,2017,山东,高性能|||
-|P3706|[[SDOI2017]硬币游戏](https://www.luogu.org/problemnew/show/P3706)💎|字符串,构造,枚举,暴力|各省省选,2017,山东,Special Judge|||
-|P3726|[[AH2017/HNOI2017]抛硬币](https://www.luogu.org/problemnew/show/P3726)💎||各省省选,2017,安徽,湖南,O2优化,高性能|||
-|P3733|[[HAOI2017]八纵八横](https://www.luogu.org/problemnew/show/P3733)💎||各省省选,2017,河南,高性能|||
-|P3747|[[六省联考2017]相逢是问候](https://www.luogu.org/problemnew/show/P3747)💎|同余,中国剩余定理,素数判断,质数,筛法,线段树|各省省选,2017,O2优化,高性能|||
-|P3766|[核心密码B](https://www.luogu.org/problemnew/show/P3766)💎|优先队列,数论,数学,概率论,统计|洛谷原创,O2优化,Special Judge|||
-|P3772|[[CTSC2017]游戏](https://www.luogu.org/problemnew/show/P3772)💎||WC/CTSC/集训队,2017,O2优化,Special Judge|||
-|P3774|[[CTSC2017]最长上升子序列](https://www.luogu.org/problemnew/show/P3774)💎|网络流|WC/CTSC/集训队,2017,O2优化,高性能|||
-|P3775|[[CTSC2017]投影](https://www.luogu.org/problemnew/show/P3775)💎||WC/CTSC/集训队,2017,O2优化,Special Judge|||
-|P3779|[[SDOI2017]龙与地下城](https://www.luogu.org/problemnew/show/P3779)💎|期望,极限,积分|各省省选,2017,山东,O2优化,Special Judge|||
-|P3780|[[SDOI2017]苹果树](https://www.luogu.org/problemnew/show/P3780)💎|单调队列,枚举,暴力,背包|各省省选,2017,山东,O2优化,高性能|||
-|P3781|[[SDOI2017]切树游戏](https://www.luogu.org/problemnew/show/P3781)💎||各省省选,2017,山东,O2优化,高性能|||
-|P3783|[[SDOI2017]天才黑客](https://www.luogu.org/problemnew/show/P3783)💎|字典树,Trie树,线段树,虚树|各省省选,2017,山东,O2优化,高性能|||
-|P3791|[普通数学题](https://www.luogu.org/problemnew/show/P3791)💎|前缀和,枚举,暴力,进制|洛谷原创,O2优化,高性能|||
+|P3704|⭐️[[SDOI2017]数字表格](https://www.luogu.org/problemnew/show/P3704)|块状链表,块状数组,分块,枚举,暴力,莫比乌斯反演|各省省选,2017,山东,高性能|||
+|P3706|⭐️[[SDOI2017]硬币游戏](https://www.luogu.org/problemnew/show/P3706)|字符串,构造,枚举,暴力|各省省选,2017,山东,Special Judge|||
+|P3726|⭐️[[AH2017/HNOI2017]抛硬币](https://www.luogu.org/problemnew/show/P3726)||各省省选,2017,安徽,湖南,O2优化,高性能|||
+|P3733|⭐️[[HAOI2017]八纵八横](https://www.luogu.org/problemnew/show/P3733)||各省省选,2017,河南,高性能|||
+|P3747|⭐️[[六省联考2017]相逢是问候](https://www.luogu.org/problemnew/show/P3747)|同余,中国剩余定理,素数判断,质数,筛法,线段树|各省省选,2017,O2优化,高性能|||
+|P3766|⭐️[核心密码B](https://www.luogu.org/problemnew/show/P3766)|优先队列,数论,数学,概率论,统计|洛谷原创,O2优化,Special Judge|||
+|P3772|⭐️[[CTSC2017]游戏](https://www.luogu.org/problemnew/show/P3772)||WC/CTSC/集训队,2017,O2优化,Special Judge|||
+|P3774|⭐️[[CTSC2017]最长上升子序列](https://www.luogu.org/problemnew/show/P3774)|网络流|WC/CTSC/集训队,2017,O2优化,高性能|||
+|P3775|⭐️[[CTSC2017]投影](https://www.luogu.org/problemnew/show/P3775)||WC/CTSC/集训队,2017,O2优化,Special Judge|||
+|P3779|⭐️[[SDOI2017]龙与地下城](https://www.luogu.org/problemnew/show/P3779)|期望,极限,积分|各省省选,2017,山东,O2优化,Special Judge|||
+|P3780|⭐️[[SDOI2017]苹果树](https://www.luogu.org/problemnew/show/P3780)|单调队列,枚举,暴力,背包|各省省选,2017,山东,O2优化,高性能|||
+|P3781|⭐️[[SDOI2017]切树游戏](https://www.luogu.org/problemnew/show/P3781)||各省省选,2017,山东,O2优化,高性能|||
+|P3783|⭐️[[SDOI2017]天才黑客](https://www.luogu.org/problemnew/show/P3783)|字典树,Trie树,线段树,虚树|各省省选,2017,山东,O2优化,高性能|||
+|P3791|⭐️[普通数学题](https://www.luogu.org/problemnew/show/P3791)|前缀和,枚举,暴力,进制|洛谷原创,O2优化,高性能|||
 |P3798|[辉夜姬的十道难题](https://www.luogu.org/problemnew/show/P3798)|剪枝,动态规划,动规,dp,搜索,模拟,记忆化搜索,贪心|洛谷原创,提交答案|||
-|P3822|[[NOI2017]整数](https://www.luogu.org/problemnew/show/P3822)💎|线段树,进制|NOI系列,2017,O2优化,高性能|||
-|P3823|[[NOI2017]蚯蚓排队](https://www.luogu.org/problemnew/show/P3823)💎|哈希,HASH,字符串,模拟|NOI系列,2017,O2优化,新云端|||
-|P3824|[[NOI2017]泳池](https://www.luogu.org/problemnew/show/P3824)💎|线性递推,递推式,递推|NOI系列,2017,O2优化,高性能|||
-|P3825|[[NOI2017]游戏](https://www.luogu.org/problemnew/show/P3825)💎|2-SAT,后缀数组,SA,强连通分量,缩点,拓扑排序|NOI系列,2017,O2优化,Special Judge,高性能|||
-|P3826|[[NOI2017]蔬菜](https://www.luogu.org/problemnew/show/P3826)💎||NOI系列,2017,O2优化,高性能|||
-|P3827|[[NOI2017]分身术](https://www.luogu.org/problemnew/show/P3827)💎||NOI系列,2017,O2优化,高性能|||
-|P3886|[[JLOI2009]神秘的生物](https://www.luogu.org/problemnew/show/P3886)💎||各省省选,2009,吉林,高性能|||
-|P3890|[[GDOI2014]比特矩阵](https://www.luogu.org/problemnew/show/P3890)💎||各省省选,2014,广东,高性能|||
-|P3893|[[GDOI2014]Beyond](https://www.luogu.org/problemnew/show/P3893)💎||各省省选,2014,广东,高性能|||
-|P3900|[[湖南集训]图样图森破](https://www.luogu.org/problemnew/show/P3900)💎||湖南,高性能|||
-|P3920|[[WC2014]紫荆花之恋](https://www.luogu.org/problemnew/show/P3920)💎|分治,平衡树,点分治|WC/CTSC/集训队,2014,O2优化,新云端|||
+|P3822|⭐️[[NOI2017]整数](https://www.luogu.org/problemnew/show/P3822)|线段树,进制|NOI系列,2017,O2优化,高性能|||
+|P3823|⭐️[[NOI2017]蚯蚓排队](https://www.luogu.org/problemnew/show/P3823)|哈希,HASH,字符串,模拟|NOI系列,2017,O2优化,新云端|||
+|P3824|⭐️[[NOI2017]泳池](https://www.luogu.org/problemnew/show/P3824)|线性递推,递推式,递推|NOI系列,2017,O2优化,高性能|||
+|P3825|⭐️[[NOI2017]游戏](https://www.luogu.org/problemnew/show/P3825)|2-SAT,后缀数组,SA,强连通分量,缩点,拓扑排序|NOI系列,2017,O2优化,Special Judge,高性能|||
+|P3826|⭐️[[NOI2017]蔬菜](https://www.luogu.org/problemnew/show/P3826)||NOI系列,2017,O2优化,高性能|||
+|P3827|⭐️[[NOI2017]分身术](https://www.luogu.org/problemnew/show/P3827)||NOI系列,2017,O2优化,高性能|||
+|P3886|⭐️[[JLOI2009]神秘的生物](https://www.luogu.org/problemnew/show/P3886)||各省省选,2009,吉林,高性能|||
+|P3890|⭐️[[GDOI2014]比特矩阵](https://www.luogu.org/problemnew/show/P3890)||各省省选,2014,广东,高性能|||
+|P3893|⭐️[[GDOI2014]Beyond](https://www.luogu.org/problemnew/show/P3893)||各省省选,2014,广东,高性能|||
+|P3900|⭐️[[湖南集训]图样图森破](https://www.luogu.org/problemnew/show/P3900)||湖南,高性能|||
+|P3920|⭐️[[WC2014]紫荆花之恋](https://www.luogu.org/problemnew/show/P3920)|分治,平衡树,点分治|WC/CTSC/集训队,2014,O2优化,新云端|||
 |P3936|[Coloring](https://www.luogu.org/problemnew/show/P3936)|搜索,期望,模拟,模拟退火|洛谷原创,Special Judge|||
-|P3978|[[TJOI2015]概率论](https://www.luogu.org/problemnew/show/P3978)💎|卡特兰,Catalan,期望,生成函数|各省省选,2015,天津,Special Judge|||
+|P3978|⭐️[[TJOI2015]概率论](https://www.luogu.org/problemnew/show/P3978)|卡特兰,Catalan,期望,生成函数|各省省选,2015,天津,Special Judge|||
 |P3992|[[BJOI2017]开车](https://www.luogu.org/problemnew/show/P3992)||各省省选,2017,北京,O2优化,高性能|||
-|P4000|[斐波那契数列](https://www.luogu.org/problemnew/show/P4000)💎|字符串,数论,数学,斐波那契,Fibonacci,期望|O2优化|||
-|P4002|[生成树计数](https://www.luogu.org/problemnew/show/P4002)💎||清华集训,2017,O2优化,高性能|||
-|P4003|[无限之环](https://www.luogu.org/problemnew/show/P4003)💎|图的建立,建图,模拟,费用流|清华集训,2017,高性能|||
-|P4004|[Hello world!](https://www.luogu.org/problemnew/show/P4004)💎||清华集训,2017,O2优化,高性能|||
-|P4005|[小 Y 和地铁](https://www.luogu.org/problemnew/show/P4005)💎|搜索,树状数组,模拟|清华集训,2017,O2优化,高性能|||
-|P4007|[小 Y 和恐怖的奴隶主](https://www.luogu.org/problemnew/show/P4007)💎||清华集训,2017,O2优化,高性能|||
-|P4033|[[Code+#2]白金元首与独舞](https://www.luogu.org/problemnew/show/P4033)💎|||||
+|P4000|⭐️[斐波那契数列](https://www.luogu.org/problemnew/show/P4000)|字符串,数论,数学,斐波那契,Fibonacci,期望|O2优化|||
+|P4002|⭐️[生成树计数](https://www.luogu.org/problemnew/show/P4002)||清华集训,2017,O2优化,高性能|||
+|P4003|⭐️[无限之环](https://www.luogu.org/problemnew/show/P4003)|图的建立,建图,模拟,费用流|清华集训,2017,高性能|||
+|P4004|⭐️[Hello world!](https://www.luogu.org/problemnew/show/P4004)||清华集训,2017,O2优化,高性能|||
+|P4005|⭐️[小 Y 和地铁](https://www.luogu.org/problemnew/show/P4005)|搜索,树状数组,模拟|清华集训,2017,O2优化,高性能|||
+|P4007|⭐️[小 Y 和恐怖的奴隶主](https://www.luogu.org/problemnew/show/P4007)||清华集训,2017,O2优化,高性能|||
+|P4033|⭐️[[Code+#2]白金元首与独舞](https://www.luogu.org/problemnew/show/P4033)|||||
 |P4039|[[AHOI2014/JSOI2014]拼图](https://www.luogu.org/problemnew/show/P4039)||各省省选,2014,安徽,江苏|||
 |P4040|[[AHOI2014/JSOI2014]宅男计划](https://www.luogu.org/problemnew/show/P4040)|贪心|各省省选,2014,安徽,江苏|||
 |P4041|[[AHOI2014/JSOI2014]奇怪的计算器](https://www.luogu.org/problemnew/show/P4041)||各省省选,2014,安徽,江苏|||
@@ -196,10 +196,10 @@
 |P4247|[[清华集训]序列操作](https://www.luogu.org/problemnew/show/P4247)|枚举,暴力,线段树|清华集训,2012,O2优化,高性能|||
 |P4249|[[WC2007]剪刀石头布](https://www.luogu.org/problemnew/show/P4249)|图的建立,建图,图论,差分,费用流|WC/CTSC/集训队,2007,O2优化,Special Judge,高性能|||
 |P4250|[[SCOI2015]小凸想跑步](https://www.luogu.org/problemnew/show/P4250)|半平面相交,半平面交,计算几何|各省省选,2015,四川,高性能|||
-|P4258|[[WC2016]挑战NPC](https://www.luogu.org/problemnew/show/P4258)💎|一般图的最大匹配,图的建立,建图|WC/CTSC/集训队,2016,Special Judge,高性能|||
+|P4258|⭐️[[WC2016]挑战NPC](https://www.luogu.org/problemnew/show/P4258)|一般图的最大匹配,图的建立,建图|WC/CTSC/集训队,2016,Special Judge,高性能|||
 |P4259|[[Code+#3]寻找车位](https://www.luogu.org/problemnew/show/P4259)|||||
 |P4260|[[Code+#3]博弈论与概率统计](https://www.luogu.org/problemnew/show/P4260)|||||
-|P4274|[[NOI2004]小H的小屋](https://www.luogu.org/problemnew/show/P4274)💎|动态规划,动规,dp,贪心|NOI系列,2004,高性能|||
+|P4274|⭐️[[NOI2004]小H的小屋](https://www.luogu.org/problemnew/show/P4274)|动态规划,动规,dp,贪心|NOI系列,2004,高性能|||
 |P4278|[带插入区间K小值](https://www.luogu.org/problemnew/show/P4278)|可持久化,替罪羊树,树套树||||
 |P4286|[[SHOI2008]安全的航线](https://www.luogu.org/problemnew/show/P4286)||各省省选,2008,上海|||
 |P4292|[[WC2010]重建计划](https://www.luogu.org/problemnew/show/P4292)||WC/CTSC/集训队,2010|||
@@ -208,11 +208,11 @@
 |P4314|[CPU监控](https://www.luogu.org/problemnew/show/P4314)|||||
 |P4323|[[JSOI2016]独特的树叶](https://www.luogu.org/problemnew/show/P4323)||2016,江苏|||
 |P4324|[[JSOI2016]扭动的回文串](https://www.luogu.org/problemnew/show/P4324)||2016,江苏|||
-|P4332|[[SHOI2014]三叉神经树](https://www.luogu.org/problemnew/show/P4332)💎|分治,树链剖分,树剖,线段树|各省省选,2014,上海,O2优化,高性能|||
+|P4332|⭐️[[SHOI2014]三叉神经树](https://www.luogu.org/problemnew/show/P4332)|分治,树链剖分,树剖,线段树|各省省选,2014,上海,O2优化,高性能|||
 |P4335|[[COI2007] Sabor](https://www.luogu.org/problemnew/show/P4335)||COCI,2007|||
-|P4337|[[ZJOI2018]线图](https://www.luogu.org/problemnew/show/P4337)💎|剪枝,枚举,暴力,状态压缩,状压|各省省选,2018,浙江,高性能|||
-|P4338|[[ZJOI2018]历史](https://www.luogu.org/problemnew/show/P4338)💎|Link-Cut Tree,LCT,构造,树链剖分,树剖|各省省选,2018,浙江,高性能|||
-|P4339|[[ZJOI2018]迷宫](https://www.luogu.org/problemnew/show/P4339)💎|强连通分量,缩点,数论,数学|各省省选,2018,浙江,高性能|||
+|P4337|⭐️[[ZJOI2018]线图](https://www.luogu.org/problemnew/show/P4337)|剪枝,枚举,暴力,状态压缩,状压|各省省选,2018,浙江,高性能|||
+|P4338|⭐️[[ZJOI2018]历史](https://www.luogu.org/problemnew/show/P4338)|Link-Cut Tree,LCT,构造,树链剖分,树剖|各省省选,2018,浙江,高性能|||
+|P4339|⭐️[[ZJOI2018]迷宫](https://www.luogu.org/problemnew/show/P4339)|强连通分量,缩点,数论,数学|各省省选,2018,浙江,高性能|||
 |P4364|[[九省联考2018]IIIDX](https://www.luogu.org/problemnew/show/P4364)|排序,线段树,贪心|各省省选,2018,高性能|||
 |P4365|[[九省联考2018]秘密袭击coat](https://www.luogu.org/problemnew/show/P4365)|动态规划,动规,dp,枚举,暴力,背包|各省省选,2018,高性能|||
 |P4372|[[USACO18OPEN]Out of Sorts P](https://www.luogu.org/problemnew/show/P4372)||USACO,2018|||

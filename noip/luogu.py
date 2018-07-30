@@ -270,8 +270,9 @@ def generate_table(problems):
 
     for problem in problems:
         index = problem['index']
-        marked = '💎' if problem['marked'] else ''
-        problem_link = '[%s](%s)%s' % (problem['title'].replace('|', '-'), problem['problem_link'], marked)
+        marked = '⭐️' if problem['marked'] else ''
+        # avoid '|' in markdown table
+        problem_link = '%s[%s](%s)' % (marked, problem['title'].replace('|', '-'), problem['problem_link'])
 
         algorithm_tags = problem.get('algorithm_tags', [])
         tags = [t for t in problem.get('tags', {}).values() if t not in algorithm_tags]
