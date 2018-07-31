@@ -22,6 +22,7 @@ except ImportError:
     from urllib.parse import urlencode, urljoin, quote
 
 import click
+from yaml import load, dump
 from git import Repo
 from bs4 import BeautifulSoup
 from selenium import webdriver
@@ -153,8 +154,8 @@ def extract_test_examples_from_article(raw_article):
         code = example.find_all('pre')
         if len(code) == 2:
             test_examples.append({
-                'input': code[0].text.strip(),
-                'output': code[1].text.strip()
+                'i': code[0].text.strip(),
+                'o': code[1].text.strip()
             })
         else:
             print(code)
@@ -194,40 +195,29 @@ def update_problems_from_page(page):
         collection.update_one({'index': problem['index']}, {'$set': problem}, upsert=True)
 
 
-def update_problem_detail(problem_id, problem_link):
-    driver = init_web_driver()
-    driver.get(problem_link)
-    driver.implicitly_wait(10)
-
-    raw_article = extract_problem_article(driver.page_source)
-    test_examples = extract_test_examples_from_article(raw_article)
-    print(test_examples)
+def update_problem_detail(problem_id, force_update=True):
     collection = get_collection()
-    collection.update_one({'index': problem_id},
-                          {'$set': {'raw_article': raw_article, 'test_examples': test_examples}})
+    problem = collection.find_one({'index': problem_id})
 
+    if not problem:
+        raise Exception('problem <%s> not found' % problem_id)
 
-def search_solutions_and_codes(path='./solutions'):
-    # search solutions
-    solutions = {}
-    for file_name in os.listdir(path):
-        file_path = os.path.join(path, file_name)
-        if os.path.isfile(file_path) and file_name.endswith('.md'):
-            index = file_name.split('.')[0]
-            solutions[index] = file_path
+    if not problem.get('raw_article'):
+        driver = init_web_driver()
+        driver.get(problem['problem_link'])
+        driver.implicitly_wait(10)
 
-    # search code
-    code_candidates = {'python': '.py'}
-    code_links = defaultdict(dict)
-    for code, suffix in code_candidates.items():
-        code_path = './' + code
-        if os.path.exists(code_path):
-            for file_name in os.listdir(code_path):
-                file_path = os.path.join(code_path, file_name)
-                if os.path.isfile(file_path) and file_name.endswith(suffix):
-                    index = file_name.split('.')[0]
-                    code_links[index][code] = file_path
-    return solutions, code_links
+        raw_article = extract_problem_article(driver.page_source)
+        collection.update_one({'index': problem_id}, {'$set': {'raw_article': raw_article}})
+
+    problem = collection.find_one({'index': problem_id})
+    test_examples = extract_test_examples_from_article(problem.get('raw_article'))
+    print(test_examples)
+    if test_examples:
+        test_data_path = os.path.join('./data', '%s.yaml' % problem_id.lower())
+        if not os.path.exists(test_data_path) or force_update:
+            with open(test_data_path, 'w') as f:
+                f.write(dump(test_examples))
 
 
 def generate_table(problems):
@@ -301,7 +291,7 @@ def generate_template(index, force_update=False):
     # print(problem)
 
     if force_update or not problem.get('raw_article'):
-        update_problem_detail(index, problem['problem_link'])
+        update_problem_detail(index)
 
     problem = db.find_one({'index': index})
 
@@ -353,27 +343,29 @@ def compile_and_test(index):
         exit(result.returncode)
 
     # test
-    test_case = problem.get('test_examples')
-    if not test_case:
+    test_data_path = os.path.join('./data', '%s.yaml' % index.lower())
+    if not os.path.exists(test_data_path):
         warnings.warn('no test case in this problem, please check it <%s>' % index)
         return
+    with open(test_data_path) as f:
+        test_case = load(f)
 
     for i, case in enumerate(test_case, 1):
-        print('=' * 10 + ' Test Case #%s ' % i + '=' * 10)
-        print('#input')
-        print(case['input'])
-        print('#output')
-        print(case['output'])
         result = subprocess.run('./%s' % output_bin,
-                                input=bytearray(case['input'], 'ascii'),
+                                input=bytearray(case['i'], 'ascii'),
                                 stdout=subprocess.PIPE)
         output = result.stdout.decode('ascii')
-        print('#test output')
-        print(output)
-        if output == case['output']:
-            print('=' * 10 + ' Test Passed ' + '=' * 10)
-        else:
-            print('X' * 10 + ' Test Failed ' + 'X' * 10)
+        if output != case['o']:
+            print('=' * 10 + ' Test Case #%s ' % i + '=' * 10)
+            print('#input')
+            print(case['i'])
+            print('#expect')
+            print(case['o'])
+            print('#output')
+            print(output)
+            print('=' * 10 + ' Test Failed ' + '=' * 10)
+            exit(1)
+    print('All Passed, Congratulations!')
 
 
 def solved_and_commit(index):
@@ -474,8 +466,8 @@ def update(args):
         get_all_problems()
     elif args.page:
         update_problems_from_page(args.page[0])
-    # elif args.problem:
-    #     update_problem(args.problem[0])
+    elif args.index:
+        update_problem_detail(args.index[0])
 
     if args.table:
         update_index_table()
