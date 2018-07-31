@@ -298,7 +298,7 @@ def generate_template(index, force_update=False):
     problem = db.find_one({'index': index})
     if not problem:
         raise Exception('problem <%s> not found in db' % index)
-    print(problem)
+    # print(problem)
 
     if force_update or not problem.get('raw_article'):
         update_problem_detail(index, problem['problem_link'])
@@ -336,7 +336,7 @@ def generate_template(index, force_update=False):
     # generate python empty file
     if not os.path.exists(code_file):
         with open(code_file, 'w') as f:
-            f.write('\n\n// %s\n' % code_file[:-3])
+            f.write('// %s %s\n' % (index, problem['title']))
             f.write('// %s\n\n' % problem['problem_link'])
 
 
