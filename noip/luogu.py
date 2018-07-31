@@ -4,6 +4,8 @@ import shutil
 import traceback
 import time
 import warnings
+import subprocess
+
 
 import argparse
 
@@ -19,6 +21,7 @@ except ImportError:
     #python3
     from urllib.parse import urlencode, urljoin
 
+import click
 from git import Repo
 from bs4 import BeautifulSoup
 from selenium import webdriver
@@ -66,7 +69,7 @@ def init_db():
     return collection
 
 
-def get_db():
+def get_collection():
     client = MongoClient('localhost', 27017)
     return client.spider[COLLECTION_NAME]
 
@@ -80,7 +83,6 @@ def init_web_driver():
     return driver
 
 
-# parse all problems page
 def extract_problems_from_page(page_content):
 
     soup = BeautifulSoup(page_content, 'html.parser')
@@ -137,12 +139,34 @@ def extract_problems_from_page(page_content):
     return problems, next_link
 
 
+def extract_problem_article(page_content):
+    soup = BeautifulSoup(page_content, 'html.parser')
+    article = soup.select_one('.lg-article')
+    return str(article)
+
+
+def extract_test_examples_from_article(raw_article):
+    article = BeautifulSoup(raw_article, 'html.parser')
+    examples = article.select('.am-g > .am-g')
+    test_examples = []
+    for example in examples:
+        code = example.find_all('pre')
+        if len(code) == 2:
+            test_examples.append({
+                'input': code[0].text.strip(),
+                'output': code[1].text.strip()
+            })
+        else:
+            print(code)
+    return test_examples
+
+
 # get all problems
-def init_all_problems():
+def get_all_problems():
     driver = init_web_driver()
 
     # parse_page(driver.page_source)
-    collection = get_db()
+    collection = get_collection()
 
     next_link = PROBLEMS_PAGE_URL(1)
     while next_link:
@@ -156,64 +180,31 @@ def init_all_problems():
             collection.update_one({'index': problem['index']}, {'$set': problem}, upsert=True)
 
 
-def update_topics():
+def update_problems_from_page(page):
     driver = init_web_driver()
-    driver.get("https://luogu.com/problemset/all/")
+
+    # parse_page(driver.page_source)
+    collection = get_collection()
+
+    next_link = PROBLEMS_PAGE_URL(page)
+    driver.get(next_link)
     time.sleep(5)
-
-    # expand topic
-    driver.find_element_by_css_selector('#expand-topic > div.btn').click()
-    topic_links = driver.find_element_by_css_selector('#current-topic-tags').find_elements_by_tag_name('a')
-
-    # get all topic link
-    topic_link_dict = dict()
-    for topic_link in topic_links:
-        link = topic_link.get_attribute('href')
-        topic = topic_link.find_element_by_css_selector('span.text-sm').text
-        topic_link_dict[link] = topic
-
-    # get url and parse topics
-    problem_topics = dict()
-    for link, topic in topic_link_dict.items():
-        driver.get(link)
-        time.sleep(1)
-
-        problems = parse_topic_page(driver.page_source)
-
-        for index in problems:
-            if index not in problem_topics:
-                problem_topics[index] = set()
-            problem_topics[index].add(topic)
-
-    pprint(problem_topics)
-
-    luogu = get_db()
-    for index, topics in problem_topics.items():
-        luogu.update_one({'index': index}, {'$set': {'tags': list(topics)}})
-
-    return problem_topics
+    problems, next_link = extract_problems_from_page(driver.page_source)
+    for problem in problems:
+        collection.update_one({'index': problem['index']}, {'$set': problem}, upsert=True)
 
 
-def update_detail(indices):
-
+def update_problem_detail(problem_id, problem_link):
     driver = init_web_driver()
-    luogu = get_db()
+    driver.get(problem_link)
+    driver.implicitly_wait(10)
 
-    for index in indices:
-        problem = luogu.find_one({'index': index})
-        if not problem:
-            continue
-        print('update index: ', index)
-        problem_link = problem['problem_link']
-        driver.get(problem_link)
-        driver.implicitly_wait(10)
-        try:
-            content = driver.find_elements_by_css_selector('div.question-content > div')[1].get_attribute('innerHTML')
-            luogu.update_one({'index': problem['index']}, {'$set': {'description': content, 'status': 'ok'}})
-        except:
-            luogu.update_one({'index': problem['index']}, {'$set': {'status': 'error'}})
-
-    driver.close()
+    raw_article = extract_problem_article(driver.page_source)
+    test_examples = extract_test_examples_from_article(raw_article)
+    print(test_examples)
+    collection = get_collection()
+    collection.update_one({'index': problem_id},
+                          {'$set': {'raw_article': raw_article, 'test_examples': test_examples}})
 
 
 def search_solutions_and_codes(path='./solutions'):
@@ -237,24 +228,6 @@ def search_solutions_and_codes(path='./solutions'):
                     index = file_name.split('.')[0]
                     code_links[index][code] = file_path
     return solutions, code_links
-
-
-def get_tag_problems(problems):
-    problems = {p['index']: p for p in problems}
-
-    topics = defaultdict(list)
-    for index, problem in problems.items():
-        if 'tags' not in problem:
-            topics['other'].append(problem)
-        else:
-            tags = problem['tags']
-            for tag in tags:
-                topics[tag].append(problem)
-
-    tag_problems = OrderedDict()
-    for tag in sorted(topics.keys()):
-        tag_problems[tag] = topics[tag]
-    return tag_problems
 
 
 def generate_table(problems):
@@ -295,7 +268,7 @@ def generate_table(problems):
 
 
 def generate_tables():
-    db = get_db()
+    db = get_collection()
     levels = db.aggregate([{"$group": {"_id": "$level", "count": {"$sum": 1}}}])
     levels = [l['_id'] for l in levels]
 
@@ -368,74 +341,93 @@ def generate_tables():
     #     f.write('\n'.join(table))
 
 
-def generate_template(index):
-    luogu = get_db()
-    problem = luogu.find_one({'index': index})
+def generate_template(index, force_update=False):
+    db = get_collection()
+    problem = db.find_one({'index': index})
     if not problem:
-        raise Exception('problem %s not found' % index)
+        raise Exception('problem <%s> not found in db' % index)
+    print(problem)
 
-    title = '%s. %s' % (index, problem['title'])
-    md_file = title + '.md'
-    py_file = title + '.py'
+    if force_update or not problem.get('raw_article'):
+        update_problem_detail(index, problem['problem_link'])
 
-    if os.path.exists(md_file):
-        warnings.warn('Be careful!!! Overwriting %s' % md_file)
+    problem = db.find_one({'index': index})
+
+    solution_file = '%s.%s.md' % (index, problem['title'])
+    code_file = index.lower() + '.cpp'
+
+    if os.path.exists(solution_file):
+        warnings.warn('Be careful!!! Overwriting %s' % solution_file)
         time.sleep(1)
 
-    # TODO: maybe unlock someday, if i'm rich.
-    locked = problem.get('locked')
-    if locked:
-        raise Warning('The Problem "%s. %s" is Locked, You should subscribe to unlock' % (index, problem['title']))
-
-    description = problem.get('description')
-
-    if not description:
-        warnings.warn('No Description here, need fetch from luogu')
-        update_detail([index])
-
-        # re get the problem
-        problem = luogu.find_one({'index': index})
-        if not problem:
-            raise Exception('problem %s not found' % index)
-        if problem['status'] != 'ok':
-            pprint(problem)
-            raise Exception('problem %s is not ok' % index)
-        if not problem.get('description'):
-            raise Exception('no description here, please check it: %s' % problem['problem_link'])
-
     abstract = ''
-    topics = problem.get('tags')
-    if topics:
-        abstract = ', '.join(map(lambda x: '**' + x + '**', topics)) + '    '
+    algorithm_tags = problem.get('algorithm_tags', [])
+    tags = list(filter(lambda t: t not in algorithm_tags, problem.get('tags', {}).values()))
+    if algorithm_tags:
+        abstract = '算法标签: ' + ', '.join(map(lambda x: '**' + x + '**', algorithm_tags)) + '\n'
 
-    label = labels.get(problem['label'], '💔')
-    abstract += '[%s](%s)' % (label, problem['problem_link']) + '    '
-    if problem.get('solution_link'):
-        abstract += '\t[💡](%s)' % problem['solution_link']
+    if tags:
+        abstract += '其他标签: ' + ', '.join(map(lambda x: '**' + x + '**', tags)) + '\n'
 
     # be careful here, be careful about the relative path
-    code_link = '[Code](../python/%s)' % urllib.parse.quote(py_file)
+    code_file_path_will_be = '../cpp/%s' % urllib.parse.quote(code_file)
 
-    markdown = html2markdown(problem['description'])
-
-    with open(md_file, 'w') as f:
-        f.write('### %s\n\n' % md_file[:-3])
+    with open(solution_file, 'w') as f:
+        f.write('### %s %s\n\n' % (index, problem['title']))
         # write topics
         f.write('%s\n\n' % abstract)
         f.write('#### Description\n\n')
-        f.write(markdown)
+        f.write('\n\n')
         f.write('\n\n#### Analysis\n\n')
-        f.write('#### %s\n\n' % code_link)
+        f.write('#### [Code](%s) \n\n' % code_file_path_will_be)
 
     # generate python empty file
-    if not os.path.exists(py_file):
-        with open(py_file, 'w') as f:
-            f.write('\n\n# %s\n' % py_file[:-3])
-            f.write('# %s\n\n' % problem['problem_link'])
+    if not os.path.exists(code_file):
+        with open(code_file, 'w') as f:
+            f.write('\n\n// %s\n' % code_file[:-3])
+            f.write('// %s\n\n' % problem['problem_link'])
+
+
+def compile_and_test(index):
+    collection = get_collection()
+    problem = collection.find_one({'index': index})
+
+    code_file = index.lower() + '.cpp'
+    output_bin = 'test.out'
+
+    # compile
+    result = subprocess.run('g++ -o {o} {src}'.format(src=code_file, o=output_bin), shell=True)
+    if result.returncode != 0:
+        exit(result.returncode)
+
+    # test
+    test_case = problem.get('test_examples')
+    if not test_case:
+        warnings.warn('no test case in this problem, please check it <%s>' % index)
+        return
+
+    for i, case in enumerate(test_case, 1):
+        print('=' * 10 + ' Test Case #%s ' % i + '=' * 10)
+        print('#input')
+        print(case['input'])
+        print('#output')
+        print(case['output'])
+        result = subprocess.run('./%s' % output_bin,
+                                input=bytearray(case['input'], 'ascii'),
+                                stdout=subprocess.PIPE)
+        output = result.stdout.decode('ascii')
+        print('#test output')
+        print(output)
+        if output == case['output']:
+            print('=' * 10 + ' Test Passed ' + '=' * 10)
+        else:
+            print('X' * 10 + ' Test Failed ' + 'X' * 10)
+
+
 
 
 def solved_and_commit(index):
-    luogu = get_db()
+    luogu = get_collection()
     problem = luogu.find_one({'index': index})
     if not problem:
         raise Exception('problem %s not found' % index)
@@ -484,43 +476,47 @@ def solved_and_commit(index):
     print(git.push())
 
 
+from argparse import ArgumentParser
+
+cli = ArgumentParser()
+subparsers = cli.add_subparsers(dest="subcommand")
+
+
+def subcommand(args, exclusive):
+    def decorator(func):
+        parser = subparsers.add_parser(func.__name__, description=func.__doc__)
+        for arg in args:
+            parser.add_argument(*arg[0], **arg[1])
+        if exclusive:
+            group = parser.add_mutually_exclusive_group()
+            for arg in exclusive:
+                group.add_argument(*arg[0], **arg[1])
+        parser.set_defaults(func=func)
+    return decorator
+
+
+def argument(*name_or_flags, **kwargs):
+    return ([*name_or_flags], kwargs)
+
+
+@subcommand([argument('problem', type=str, nargs=1, help='problem id')], [
+    argument('-g', '--generate', action='store_true'),
+    argument('-t', '--test', action='store_true'),
+    argument('-s', '--solve', action='store_true'),
+])
+def solve(args):
+    print(args.problem)
+    if args.generate:
+        generate_template(args.problem[0])
+    elif args.test:
+        compile_and_test(args.problem[0])
+    elif args.solve:
+        solved_and_commit(args.problem[0])
+
+
 if __name__ == '__main__':
-
-    parser = argparse.ArgumentParser()
-    subparsers = parser.add_subparsers(dest='command')
-
-    parser_init = subparsers.add_parser('init', help='init db and init all problems')
-    parser_generate = subparsers.add_parser('generate', help='generate readme or solution template')
-
-    options_init = parser_init.add_mutually_exclusive_group()
-    options_init.add_argument('--db', action='store_true')
-    options_init.add_argument('-p', '--problems', action='store_true')
-
-    options_generate = parser_generate.add_mutually_exclusive_group()
-    options_generate.add_argument('-t', '--table', action='store_true')
-    options_generate.add_argument('-i', '--index', nargs=1, help='generate template')
-    options_generate.add_argument('-s', '--solved', nargs=1)
-
-    args = parser.parse_args()
-
-    # print(args)
-    if args.command == 'init':
-        if args.db:
-            print('init database')
-            init_db()
-        elif args.problems:
-            print('init problems')
-            init_all_problems()
-        else:
-            parser_init.print_help()
-    elif args.command == 'generate':
-        if args.table:
-            generate_tables()
-        elif args.index:
-            generate_template(args.index[0])
-        elif args.solved:
-            solved_and_commit(args.solved[0])
-        else:
-            parser_generate.print_help()
+    args = cli.parse_args()
+    if args.subcommand is None:
+        cli.print_help()
     else:
-        parser.print_help()
+        args.func(args)
