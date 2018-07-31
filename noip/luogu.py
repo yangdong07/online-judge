@@ -16,10 +16,10 @@ from pprint import pprint
 
 try:
     #python2
-    from urllib import urlencode, urljoin
+    from urllib import urlencode, urljoin, quote
 except ImportError:
     #python3
-    from urllib.parse import urlencode, urljoin
+    from urllib.parse import urlencode, urljoin, quote
 
 import click
 from git import Repo
@@ -252,6 +252,9 @@ def generate_table(problems):
 
         solution_link = ''
         code_link = ''
+        if problem.get('solved'):
+            solution_link = '[📜](../solutions/%s)' % quote('.'.join([index, problem['title'], 'md']))
+            code_link = '[C++](../cpp/%s)' % quote('.'.join([index.lower(), 'cpp']))
         content = [
             '',
             index,
@@ -267,7 +270,7 @@ def generate_table(problems):
     return table
 
 
-def generate_tables():
+def update_index_table():
     db = get_collection()
     levels = db.aggregate([{"$group": {"_id": "$level", "count": {"$sum": 1}}}])
     levels = [l['_id'] for l in levels]
@@ -288,57 +291,6 @@ def generate_tables():
             f.write('\n## %s\n\n' % level)
             for line in generate_table(problems):
                 f.write(line + '\n')
-
-    #
-    # solved_count = defaultdict(int)
-    # for tag, problems in tag_problems.items():
-    #     solved = [p for p in problems if p['index'] in solutions]
-    #     solved_count[tag] = len(solved)
-    #
-    # headers = ['Topic', 'Total', 'Solved', 'Progress']
-    # markers = ['-'*len(h) for h in headers]
-    # markers[-1] = markers[-1] + ':'
-    # headers = [''] + headers + ['']
-    # markers = [''] + markers + ['']
-    #
-    # table = list()
-    # table.append("|".join(headers))
-    # table.append("|".join(markers))
-    #
-    # # tag tables
-    # for tag in tag_problems:
-    #     tag_link = urllib.parse.quote(os.path.join('./topics', tag + '.md'))
-    #     count = len(tag_problems[tag])
-    #     # print
-    #     solved = solved_count[tag]
-    #     progress = 100.0 * solved / count
-    #     content = [
-    #         '',
-    #         '[%s](%s)' % (tag, tag_link),
-    #         str(count),
-    #         # problem_tags,
-    #         str(solved),
-    #         '%5.2f %%' % progress,
-    #         '',
-    #     ]
-    #     table.append('|'.join(content))
-    #
-    # total = luogu.find().count()
-    # solved = len(solutions.keys())
-    # content = [
-    #     '',
-    #     'Total',
-    #     str(total),
-    #     # problem_tags,
-    #     str(solved),
-    #     '%.2f %%' % (100.0 * solved / total),
-    #     '',
-    # ]
-    # table.append('|'.join(content))
-    #
-    # with open('index.md', 'w') as f:
-    #     f.write('\n## luogu\n\n')
-    #     f.write('\n'.join(table))
 
 
 def generate_template(index, force_update=False):
@@ -370,7 +322,7 @@ def generate_template(index, force_update=False):
         abstract += '其他标签: ' + ', '.join(map(lambda x: '**' + x + '**', tags)) + '\n'
 
     # be careful here, be careful about the relative path
-    code_file_path_will_be = '../cpp/%s' % urllib.parse.quote(code_file)
+    code_file_path_will_be = '../cpp/%s' % quote(code_file)
 
     with open(solution_file, 'w') as f:
         f.write('### %s %s\n\n' % (index, problem['title']))
@@ -424,23 +376,21 @@ def compile_and_test(index):
             print('X' * 10 + ' Test Failed ' + 'X' * 10)
 
 
-
-
 def solved_and_commit(index):
-    luogu = get_collection()
-    problem = luogu.find_one({'index': index})
+    collection = get_collection()
+    problem = collection.find_one({'index': index})
     if not problem:
         raise Exception('problem %s not found' % index)
 
-    title = '%s. %s' % (index, problem['title'])
-    files = [title + '.md', title + '.cpp']
+    solution_file = '%s.%s.md' % (index, problem['title'])
+    code_file = index.lower() + '.cpp'
 
     # move files
     to_move = {}
     path_map = {'cpp': 'cpp', 'md': 'solutions'}
-    for f in files:
+    for f in [solution_file, code_file]:
         if not os.path.exists(f):
-            warnings.warn('solution file <%s> not exists' % f)
+            warnings.warn('solutions file <%s> not exists' % f)
             continue
 
         suffix = f.rsplit('.', 1)[-1]
@@ -458,16 +408,16 @@ def solved_and_commit(index):
     for src, dst in to_move.items():
         shutil.move(src, dst)
 
-    # udpate readme and tables
-    generate_readme()
-    generate_tables_by_tag()
+    # update solved tag and  update index table?
+    collection.update_one({'index': index}, {'$set': {'solved': True}})
+    update_index_table()
 
     # git commit and push
-    git = Repo('.').git
+    git = Repo('../').git
     print(git.add('.'))
     print(git.status())
 
-    default_summary = '%s, Solved' % title
+    default_summary = '%s %s, Solved' % (index, problem['title'])
     commit = input('\nCheck git status, and Input Summary: [%s]\n' % default_summary)
     commit = commit or default_summary
     print(git.commit('-m', commit))
@@ -512,6 +462,23 @@ def solve(args):
         compile_and_test(args.problem[0])
     elif args.solve:
         solved_and_commit(args.problem[0])
+
+
+@subcommand([argument('-t', '--table', action='store_true', help='update index table')], [
+    argument('-a', '--all', action='store_true'),
+    argument('-p', '--page', nargs=1),
+    argument('-i', '--index', nargs=1, help='problem id')
+])
+def update(args):
+    if args.all:
+        get_all_problems()
+    elif args.page:
+        update_problems_from_page(args.page[0])
+    # elif args.problem:
+    #     update_problem(args.problem[0])
+
+    if args.table:
+        update_index_table()
 
 
 if __name__ == '__main__':
