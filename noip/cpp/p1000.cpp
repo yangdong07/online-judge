@@ -1,7 +1,7 @@
 // P1000 超级玛丽游戏
 // https://www.luogu.org/problemnew/show/P1000
 
-#include<stdio.h>
+#include <stdio.h>
 
 int main() {
     printf(
