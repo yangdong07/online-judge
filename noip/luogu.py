@@ -355,7 +355,8 @@ def compile_and_test(index):
                                 input=bytearray(case['i'], 'ascii'),
                                 stdout=subprocess.PIPE)
         output = result.stdout.decode('ascii')
-        if output != case['o']:
+        # sometimes there will have a '\n' at end;
+        if output != case['o'] and output != case['o'] + '\n':  
             print('=' * 10 + ' Test Case #%s ' % i + '=' * 10)
             print('#input')
             print(case['i'])
