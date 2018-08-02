@@ -365,7 +365,7 @@ def compile_and_test(index):
             print('#output')
             print(output)
             print('=' * 10 + ' Test Failed ' + '=' * 10)
-            # exit(1)
+            exit(1)
     print('All Passed, Congratulations!')
 
 
