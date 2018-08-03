@@ -350,7 +350,7 @@ def compile_and_test(index):
     with open(test_data_path) as f:
         test_case = load(f)
 
-    for i, case in enumerate(test_case, 1):
+    for i, case in enumerate(reversed(test_case), 1):
         result = subprocess.run('./%s' % output_bin,
                                 input=bytearray(case['i'], 'ascii'),
                                 stdout=subprocess.PIPE)
@@ -367,6 +367,25 @@ def compile_and_test(index):
             print('=' * 10 + ' Test Failed ' + '=' * 10)
             exit(1)
     print('All Passed, Congratulations!')
+
+
+def add_test_case(index):
+    test_data_path = os.path.join('./data', '%s.yaml' % index.lower())
+    if not os.path.exists(test_data_path):
+        warnings.warn('no test case in this problem, please check it <%s>' % index)
+
+    with open('./testdata.in') as f:
+        i = f.read()
+
+    with open('./testdata.out') as f:
+        o = f.read()
+
+    with open(test_data_path) as f:
+        test_case = load(f)
+        test_case.append({'i': i, 'o': o})
+
+    with open(test_data_path, 'w') as f:
+        dump(test_case, f)
 
 
 def solved_and_commit(index):
@@ -446,6 +465,7 @@ def argument(*name_or_flags, **kwargs):
     argument('-g', '--generate', action='store_true'),
     argument('-t', '--test', action='store_true'),
     argument('-s', '--solve', action='store_true'),
+    argument('-a', '--add', action='store_true'),
 ])
 def solve(args):
     print(args.problem)
@@ -455,6 +475,8 @@ def solve(args):
         compile_and_test(args.problem[0])
     elif args.solve:
         solved_and_commit(args.problem[0])
+    elif args.add:
+        add_test_case(args.problem[0])
 
 
 @subcommand([argument('-t', '--table', action='store_true', help='update index table')], [
