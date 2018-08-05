@@ -65,9 +65,9 @@ STATE play_board(string b, int step)
                     state[b] = OWIN;
                 else
                     state[b] = XWIN;
-                return state[b];
             }
             b[i] = '-';
+            return state[b];
     }
 }
 
