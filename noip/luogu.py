@@ -319,8 +319,7 @@ def generate_template(index, force_update=False):
         # write topics
         f.write('%s\n\n' % abstract)
         f.write('#### Description\n\n')
-        f.write('\n\n')
-        f.write('\n\n#### Analysis\n\n')
+        f.write('#### Analysis\n\n')
         f.write('#### [Code](%s) \n\n' % code_file_path_will_be)
 
     # generate python empty file
