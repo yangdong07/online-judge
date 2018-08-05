@@ -5,12 +5,12 @@
 
 using namespace std;
 
-#define MAX_N 30000
+#define MAX_N 30002
 
 int main()
 {
-    long mana, skills, health;
-    long cost, damage;
+    long long mana, skills, health;
+    long long cost, damage;
     bool kill = false;
 
     cin >> mana >> skills >> health;
@@ -18,9 +18,17 @@ int main()
     for (int i = 1; i <= skills; ++i)
     {
         cin >> cost >> damage;
-        if (mana / cost * damage >= health)
+        if (cost == 0)
         {
-            cout << i << " ";
+            if (damage > 0)
+            {
+                cout << (kill ? " " : "") << i;
+                kill = true;
+            }
+        }
+        else if (mana / cost * damage >= health)
+        {
+            cout << (kill ? " " : "") << i;
             kill = true;
         }
     }
