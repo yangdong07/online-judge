@@ -209,7 +209,7 @@ def update_problem_detail(problem_id, force_update=True):
 
         raw_article = extract_problem_article(driver.page_source)
         collection.update_one({'index': problem_id}, {'$set': {'raw_article': raw_article}})
-
+    print(problem)
     problem = collection.find_one({'index': problem_id})
     test_examples = extract_test_examples_from_article(problem.get('raw_article'))
     print(test_examples)
@@ -297,6 +297,7 @@ def generate_template(index, force_update=False):
         update_problem_detail(index)
 
     problem = db.find_one({'index': index})
+    print(problem)
 
     solution_file = '%s.%s.md' % (index, problem['title'])
     code_file = index.lower() + '.cpp'
@@ -350,6 +351,7 @@ def compile_and_test(index):
         warnings.warn('no test case in this problem, please check it <%s>' % index)
         result = subprocess.run('./%s' % output_bin)
         return
+
     with open(test_data_path) as f:
         test_case = load(f)
 
