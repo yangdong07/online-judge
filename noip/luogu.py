@@ -297,7 +297,6 @@ def generate_template(index, force_update=False):
         update_problem_detail(index)
 
     problem = db.find_one({'index': index})
-    print(problem)
 
     solution_file = '%s.%s.md' % (index, problem['title'])
     code_file = index.lower() + '.cpp'
