@@ -275,10 +275,13 @@ def update_index_table():
 
     for level in levels:
         problems = db.find({'level': level})
+        count = db.count({'level': level})
+        solved = db.count({'level': level, 'solved': True})
         file_path = os.path.join('./index', '%s.%s.md' % (LEVELS[level], level.replace('/', '\\')))
         print(file_path)
         with open(file_path, 'w') as f:
             f.write('\n## %s\n\n' % level)
+            f.write('%d / %d\n\n' % (solved, count))
             for line in generate_table(problems):
                 f.write(line + '\n')
 

@@ -1,6 +1,8 @@
 
 ## NOI/NOI+/CTSC
 
+0 / 281
+
 |#|Title|Algorithm Tags|Tags|Solution|Code|
 |:---:|---|:---:|:---:|:---:|:---:|
 |P1117|⭐️[[NOI2016]优秀的拆分](https://www.luogu.org/problemnew/show/P1117)|后缀数组,SA,字符串,枚举,暴力|NOI系列,2016,O2优化,高性能|||
