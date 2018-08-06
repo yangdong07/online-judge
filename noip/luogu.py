@@ -348,6 +348,7 @@ def compile_and_test(index):
     test_data_path = os.path.join('./data', '%s.yaml' % index.lower())
     if not os.path.exists(test_data_path):
         warnings.warn('no test case in this problem, please check it <%s>' % index)
+        result = subprocess.run('./%s' % output_bin)
         return
     with open(test_data_path) as f:
         test_case = load(f)
