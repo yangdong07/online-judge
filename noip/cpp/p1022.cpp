@@ -32,7 +32,7 @@ char parse(char *s, int n, int *pa, int *pb)
         if (isalpha(s[i]))  // x
         {
             c = s[i];
-            *pa += (sign * d);
+            *pa += (sign * (d == 0 ? 1 : d));
             sign = 1;
         }
         else
@@ -64,5 +64,5 @@ int main()
     c = parse(s + i, n + 1, &a2, &b2);
     // printf("%d x + %d = %d x + %d", a1, b1, a2, b2);
 
-    printf("%c=%.3f", c, 1.0 * (b2 - b1) / ((a1 - a2) * 1.0));
+    printf("%c=%.3f", c, b2 == b1 ? 0.0 : 1.0 * (b2 - b1) / (a1 - a2));
 }
