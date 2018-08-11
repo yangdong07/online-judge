@@ -298,7 +298,8 @@ def generate_template(index, force_update=False):
 
     problem = db.find_one({'index': index})
 
-    solution_file = '%s.%s.md' % (index, problem['title'])
+    # title is not regular
+    solution_file = '%s.%s.md' % (index, problem['title'].replace('/', '-'))
     code_file = index.lower() + '.cpp'
 
     if os.path.exists(solution_file):
