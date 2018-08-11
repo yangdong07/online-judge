@@ -84,6 +84,11 @@ def init_web_driver():
     return driver
 
 
+def regular_file(*segments, join='.', suffix='.md'):
+    segments = map(lambda s: s.replace('/', '-'), segments);
+    return join.join(segments) + '.md'
+
+
 def extract_problems_from_page(page_content):
 
     soup = BeautifulSoup(page_content, 'html.parser')
@@ -299,7 +304,7 @@ def generate_template(index, force_update=False):
     problem = db.find_one({'index': index})
 
     # title is not regular
-    solution_file = '%s.%s.md' % (index, problem['title'].replace('/', '-'))
+    solution_file = regular_file(index, problem['title'])
     code_file = index.lower() + '.cpp'
 
     if os.path.exists(solution_file):
@@ -399,7 +404,7 @@ def solved_and_commit(index):
     if not problem:
         raise Exception('problem %s not found' % index)
 
-    solution_file = '%s.%s.md' % (index, problem['title'])
+    solution_file = regular_file(index, problem['title'])
     code_file = index.lower() + '.cpp'
 
     # move files
