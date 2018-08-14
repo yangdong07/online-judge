@@ -361,6 +361,7 @@ def compile_and_test(index):
         test_case = load(f)
 
     for i, case in enumerate(reversed(test_case), 1):
+        start_time = time.time();
         result = subprocess.run('./%s' % output_bin,
                                 input=bytearray(case['i'], 'ascii'),
                                 stdout=subprocess.PIPE)
@@ -375,6 +376,7 @@ def compile_and_test(index):
             print('#output')
             print(output)
             print('=' * 10 + ' Test Failed ' + '=' * 10)
+            print('time used: %.3f s' % (time.time() - start_time))
             exit(1)
     print('All Passed, Congratulations!')
 
