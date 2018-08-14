@@ -28,6 +28,22 @@ void print_solution()
     putchar('\n');
 }
 
+bool check_valid(int col)
+{
+    int a, b, c;
+    for (int j = n - col - 1; j >= 0; --j)
+    {
+        a = v[s[0][j]];
+        b = v[s[1][j]];
+        c = v[s[2][j]];
+        if (a == -1 || b == -1 || c == -1) continue;
+
+        if ((a + b) % n != c && (a + b + 1) % n != c)
+            return false;
+    }
+    return !(a + b >= n);
+}
+
 bool solve(int r, int c, int sum)
 {
     if (c == n)
@@ -35,9 +51,13 @@ bool solve(int r, int c, int sum)
         // print_solution();
         return sum == 0;
     }
+    if (!r && !check_valid(c + 1))
+    {
+        return false;
+    }
     int j = n - c - 1;
-
-    int x = v[s[r][j]], ch = s[r][j];
+    int ch = s[r][j];
+    int x = v[ch];
     if (r < 2)  // rows
     {
         if (x != -1) // assigned
@@ -83,7 +103,6 @@ int main()
 
     // for (int i = 0; i < n; ++i)
     //     printf("%d:%d ", a[i], v[a[i]]);
-
 
     for (int i = n - 1, j = 0; i >= 0; --i)
     {
