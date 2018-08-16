@@ -367,6 +367,8 @@ def compile_and_test(index):
                                 stdout=subprocess.PIPE)
         output = result.stdout.decode('ascii')
         # sometimes there will have a '\n' at end;
+        with open('test.output', 'w') as f:
+            f.write(output);
         if output != case['o'] and output != case['o'] + '\n':  
             print('=' * 10 + ' Test Case #%s ' % i + '=' * 10)
             print('#input')
