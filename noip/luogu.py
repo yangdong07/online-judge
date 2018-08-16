@@ -364,8 +364,10 @@ def compile_and_test(index):
         start_time = time.time();
         result = subprocess.run('./%s' % output_bin,
                                 input=bytearray(case['i'], 'ascii'),
-                                stdout=subprocess.PIPE)
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE)
         output = result.stdout.decode('ascii')
+        error = result.stderr.decode('ascii')
         # sometimes there will have a '\n' at end;
         with open('test.output', 'w') as f:
             f.write(output);
@@ -377,6 +379,7 @@ def compile_and_test(index):
             print(case['o'])
             print('#output')
             print(output)
+            print(error)
             print('=' * 10 + ' Test Failed ' + '=' * 10)
             print('time used: %.3f s' % (time.time() - start_time))
             exit(1)
