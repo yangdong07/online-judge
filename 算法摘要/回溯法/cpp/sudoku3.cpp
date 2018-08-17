@@ -207,10 +207,10 @@ bool parse_grid(string &g, string v[NN])
 }
 
 
-// int search_count = 0;
+int sc = 0;
 bool search(string v[NN])
 {
-    // search_count++;
+    sc++;
     int i = 0;
     while (i < NN && v[i++].size() == 1);
     if (i == NN)
@@ -264,7 +264,7 @@ int main()
 
     search(v);
     
-    // printf("search count: %d\n", search_count);
+    printf("%d\n", sc);
     // display(v);
     // string s = "123";
     // printf("%s\n", s.c_str());
