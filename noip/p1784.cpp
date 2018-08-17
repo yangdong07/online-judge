@@ -4,9 +4,7 @@
 #include <cstdio>
 #include <string>
 #include <algorithm>
-#include <map>
 #include <set>
-#include <cctype>
 
 using namespace std;
  
@@ -17,7 +15,7 @@ using namespace std;
 
 const string DIGITS = "123456789";
 
-void display(string &g);     // display grid
+void display(string &g);    // display grid
 void display(string v[NN]); // values of each position
 void init();                // init units and peers
 
@@ -25,13 +23,27 @@ void init();                // init units and peers
 bool assign(string v[NN], int k, char d); 
 // eliminate d from v[k], propagate if possible
 bool eliminate(string v[NN], int k, char d);  
+// search result from all possible
+bool search(string v[NN]);
 
-string grid = "003020600900305001001806400008102900700000008006708200002609500800203009005010300";
-string values[NN];
 
 set<int> units[3][NN]; // row, col, box
 set<int> peers[NN];
 
+
+void print_grid(string v[NN])
+{
+    int i, j;
+    for (i = 0; i < N; ++i)
+    {
+        for (j = 0; j < N; ++j)
+        {
+            if (j > 0) putchar(' ');
+            putchar(v[i * N + j][0]);
+        }
+        putchar('\n');
+    }
+}
 
 void display(string v[NN])
 {
@@ -59,6 +71,7 @@ void display(string v[NN])
         }
         putchar('\n');
     }
+    // putchar('\n');
 }
 
 void display(string &g)
@@ -120,7 +133,6 @@ void init()
 
 bool assign(string v[NN], int k, char d)
 {
-    printf("assign %c to v[%d]\n", d, k);
     // assign d to v[k], eliminate all the other values from v[k]
     // and propagate if possible
     // return true if no contradiction is detected.
@@ -129,6 +141,8 @@ bool assign(string v[NN], int k, char d)
     size_t i = t.find(d);
     if (i != string::npos)
         t.erase(i, 1);
+
+    // if (t.size() > 0) printf("assign %c to v[%d][%d]\n", d, k / N, k % N);
     for (i = 0; i < t.size(); ++i)
         flag = eliminate(v, k, t[i]) && flag;
 
@@ -137,13 +151,13 @@ bool assign(string v[NN], int k, char d)
 
 bool eliminate(string v[NN], int k, char d)
 {
-    printf("eliminate %c from v[%d]\n", d, k);
     // eliminate d from v[k];
     // propagate when values or places <= 2.
     // return true if no contracdiction detected, otherwise false
     size_t i = v[k].find(d);
     if (i == string::npos) return true;
 
+    // printf("eliminate %c from v[%d][%d]\n", d, k / N, k % N);
     v[k].erase(i, 1);
 
     bool flag = true;
@@ -193,26 +207,65 @@ bool parse_grid(string &g, string v[NN])
 }
 
 
+// int search_count = 0;
+bool search(string v[NN])
+{
+    // search_count++;
+    int i = 0;
+    while (i < NN && v[i++].size() == 1);
+    if (i == NN)
+    {
+        // found solution
+        // display(v);
+        print_grid(v);
+        return true;
+    }
+
+    // find the shortest/most possible
+    int min_l = N, k;
+    for (i = 0; i < NN; ++i)
+        if (v[i].size() > 1 && v[i].size() < min_l)
+        {
+            min_l = v[i].size();
+            k = i;
+        }
+    // try assign every possible
+    string vc[NN]; // copy of v[NN];
+    for (i = 0; i < v[k].size(); ++i)
+    {
+        copy(v, v + NN, vc);
+        if (!assign(vc, k, v[k][i])) continue;
+        if (search(vc)) return true;
+    }
+    return false;
+}
+
+
 int main()
 {
-    display(grid);
- 
-    // string v[NN];
-    // char num[10];
-    // for (int i = 0; i < NN; ++i)
-    // {
-    //     sprintf(num, "%d", i);
-    //     v[i] = string(num);
-    // }
-    // display(v);
-
     init();
 
+    int t;
+    string grid = "8..........36......7..9.2...5...7.......457.....1...3...1....68..85...1..9....4..";
     string v[NN];
-    string grid2 = "4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......";
-    parse_grid(grid2, v);
 
-    display(v);
+    for (int i = 0; i < NN; ++i)
+    {
+        scanf("%d", &t);
+        grid[i] = '0' + t;
+    }
+
+    // string grid = "003020600900305001001806400008102900700000008006708200002609500800203009005010300";
+    // string grid = "4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......";
+    // string grid = "7..9....11....59.....2...8...5.2...3......648413........7..2.9.2.1.6.8.4.8.5.4.12";
+    // string grid = "8..........36......7..9.2...5...7.......457.....1...3...1....68..85...1..9....4..";
+    // display(grid);
+    parse_grid(grid, v);
+
+    search(v);
+    
+    // printf("search count: %d\n", search_count);
+    // display(v);
     // string s = "123";
     // printf("%s\n", s.c_str());
     // // if (s.find('4') != string::npos)
