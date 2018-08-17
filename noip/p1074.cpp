@@ -12,6 +12,7 @@ using namespace std;
 int grid[NN];
 bool row[N][N + 1], col[N][N + 1], box[N][N + 1];
 int score[NN];
+int spiral[NN];
 
 int max_sum = -1;
 
@@ -26,26 +27,30 @@ void print_grid()
 
 void search(int k, int sum)
 {
-    while (k < NN && grid[k] != 0) ++k;
+    while (k < NN && grid[spiral[k]] != 0) ++k;
     if (k == NN)
     {
         if (sum > max_sum)
+        {
             max_sum = sum;
-        // print_grid();
-        // printf("\n");
-        // printf("%d\n", max_sum);
+            print_grid();
+            printf("%d\n", max_sum);
+        }
+        // max_sum = sum;
         return;
     }
 
-    int r = k / N, c = k % N;
-    for (int i = 1; i <= 9; i++)
+    int kk = spiral[k];
+    int r = kk / N, c = kk % N;
+    for (int i = 1; i <= 9; ++i)
         if (!row[r][i] && !col[c][i] && !box[r / 3 * 3 + c / 3][i])
         {
             row[r][i] = col[c][i] = box[r / 3 * 3 + c / 3][i] = 1;
-            grid[k] = i;
-            search(k + 1, sum + i * score[k]);
+            grid[kk] = i;
+            search(k + 1, sum + i * score[kk]);
+            // if (max_sum != -1) return;
             row[r][i] = col[c][i] = box[r / 3 * 3 + c / 3][i] = 0;
-            grid[k] = 0;
+            grid[kk] = 0;
         }
 }
 
@@ -67,6 +72,32 @@ int main()
                 row[i][t] = col[j][t] = box[i / 3 * 3 + j / 3][t] = 1;
             }
         }
+
+    // spiral
+    int rs = 0, re = N - 1, cs = 0, ce = N - 1;
+    int k = 0;
+    while (rs <= re && cs <= ce)
+    {
+        i = rs;
+        for (j = cs; j < ce; ++j)
+            spiral[k++] = i * N + j;
+        for (; i < re; ++i)
+            spiral[k++] = i * N + j;
+        for (; j > cs; --j)
+            spiral[k++] = i * N + j;
+        for (; i > rs; --i)
+            spiral[k++] = i * N + j;
+        ++rs, ++cs, --re, --ce;
+    }
+    if (k < NN) spiral[k] = i * N + j;
+
+    // for (i = 0; i < NN; ++i)
+    //     printf("%d ", spiral[i]);
+    // printf("\n");
+    // for (i = 0; i < N; ++i, putchar('\n'))
+    //     for(j = 0; j < N; ++j)
+    //         printf("%3d", i * N + j);
+    // printf("\n");
     search(0, sum);
     printf("%d\n", max_sum);
     return 0;
