@@ -360,6 +360,7 @@ def compile_and_test(index):
     with open(test_data_path) as f:
         test_case = load(f)
 
+    time_used = []
     for i, case in enumerate(reversed(test_case), 1):
         start_time = time.time();
         result = subprocess.run('./%s' % output_bin,
@@ -371,6 +372,7 @@ def compile_and_test(index):
         # sometimes there will have a '\n' at end;
         with open('test.output', 'w') as f:
             f.write(output);
+        time_used.append(time.time() - start_time)
         if output != case['o'] and output != case['o'] + '\n':  
             print('=' * 10 + ' Test Case #%s ' % i + '=' * 10)
             print('#input')
@@ -381,8 +383,11 @@ def compile_and_test(index):
             print(output)
             print(error)
             print('=' * 10 + ' Test Failed ' + '=' * 10)
-            print('time used: %.3f s' % (time.time() - start_time))
+            print('time used: %.3f s' % time_used[-1])
             exit(1)
+    print(time_used)
+    # for t in time_used:
+    #     print('time used: %.3f s' % t)
     print('All Passed, Congratulations!')
 
 
