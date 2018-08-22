@@ -46,6 +46,7 @@ int main()
         }
     
     printf("%d", max_dp);
+    printf("%d", max_dp);
 
     return 0;
 }
