@@ -33,8 +33,8 @@ int main()
         dp[0][j] = M[i][j] ? dp[0][j - 1] + 1 : 0;
     
     int max_dp = 0;
-    for (i = 1; i < n; ++i)
-        for (j = 1; j < m; ++j)
+    for (i = 1; i <= n; ++i)
+        for (j = 1; j <= m; ++j)
         {
             if (M[i][j])
             {
