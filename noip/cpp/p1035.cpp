@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <cstdio>
+#include <cstdio>
+#include <
 
 using namespace std;
 
@@ -13,7 +15,8 @@ int main()
 
     cin >> k;
 
-    while (s <= k) {
+    while (s <= k)
+    {
         s += 1.0 / ++n;
     }
     cout << n;
