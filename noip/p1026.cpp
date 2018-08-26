@@ -58,6 +58,7 @@ int main()
     int wc[MAX_N][MAX_N] = {0};
     
     for (i = 0; i < len; ++i)
+        for (j = 0)
         for (j = 0; j < k; ++j)
         {
             if (strncmp(s + i, dict[j], wl[j]) == 0)
