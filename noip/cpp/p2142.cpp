@@ -17,7 +17,7 @@ string subtract(string num1, string num2)
         num1.insert(0, l2 - l1, '0'); // padding zeros
     
     bool negative = num1 < num2;
-    if (negative) { string tmp = num1; num1 = num2; num2 = tmp; }
+    if (negative) num1.swap(num2);
 
     for (int i = num1.length() - 1; i >= 0; --i)
     {
