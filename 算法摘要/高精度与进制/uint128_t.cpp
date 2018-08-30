@@ -1,14 +1,10 @@
-
-
-#include <cstdint>
+#include <iostream>
 #include <ostream>
 
 using namespace std;
 
-class uint128_t;
-
-const uint128_t uint128_0(0);
-const uint128_t uint128_0(1);
+typedef unsigned long long uint64_t;
+typedef unsigned int uint32_t;
 
 class uint128_t
 {
@@ -17,67 +13,77 @@ class uint128_t
 
   public:
     // constructor
-    uint128_t() UPPER(0), LOWER(0) {};
-    uint128_t(uint64_t l) UPPER(0), LOWER(l) {};
-    uint128_t(uint64_t u, uint64_t l) UPPER(u), LOWER(l) {};
+    uint128_t(): UPPER(0), LOWER(0) {}
+    uint128_t(uint64_t l): UPPER(0), LOWER(l) {}
+    uint128_t(uint64_t h, uint64_t l): UPPER(h), LOWER(l) {}
 
     // assignments
-
     uint128_t operator+(const uint128_t &rhs) const
     {
         return uint128_t(UPPER + rhs.UPPER + ((LOWER + rhs.LOWER) < LOWER),
                          LOWER + rhs.LOWER);
     }
 
-    uint128_t uint128_t::operator*(const uint128_t & rhs) const{
-    // split values into 4 32-bit parts
-    uint64_t top[4] = {UPPER >> 32, UPPER & 0xffffffff, LOWER >> 32, LOWER & 0xffffffff};
-    uint64_t bottom[4] = {rhs.UPPER >> 32, rhs.UPPER & 0xffffffff, rhs.LOWER >> 32, rhs.LOWER & 0xffffffff};
-    uint64_t products[4][4];
-
-    // multiply each component of the values
-    for(int y = 3; y > -1; y--){
-        for(int x = 3; x > -1; x--){
-            products[3 - x][y] = top[x] * bottom[y];
-        }
+    uint128_t &operator+=(const uint128_t &rhs)
+    {
+        *this = *this + rhs;
+        return *this;
     }
 
-    // first row
-    uint64_t fourth32 = (products[0][3] & 0xffffffff);
-    uint64_t third32  = (products[0][2] & 0xffffffff) + (products[0][3] >> 32);
-    uint64_t second32 = (products[0][1] & 0xffffffff) + (products[0][2] >> 32);
-    uint64_t first32  = (products[0][0] & 0xffffffff) + (products[0][1] >> 32);
-
-    // second row
-    third32  += (products[1][3] & 0xffffffff);
-    second32 += (products[1][2] & 0xffffffff) + (products[1][3] >> 32);
-    first32  += (products[1][1] & 0xffffffff) + (products[1][2] >> 32);
-
-    // third row
-    second32 += (products[2][3] & 0xffffffff);
-    first32  += (products[2][2] & 0xffffffff) + (products[2][3] >> 32);
-
-    // fourth row
-    first32  += (products[3][3] & 0xffffffff);
-
-    // move carry to next digit
-    third32  += fourth32 >> 32;
-    second32 += third32  >> 32;
-    first32  += second32 >> 32;
-
-    // remove carry from current digit
-    fourth32 &= 0xffffffff;
-    third32  &= 0xffffffff;
-    second32 &= 0xffffffff;
-    first32  &= 0xffffffff;
-
-    // combine components
-    return uint128_t((first32 << 32) | second32, (third32 << 32) | fourth32);
-}
-
-    uint128_t operator<<(const uint32_t &shift) const
+    bool operator>(const uint128_t &rhs) const
     {
-        if (shift == 0)
+        if (UPPER == rhs.UPPER)
+            return (LOWER > rhs.LOWER);
+        return (UPPER > rhs.UPPER);
+    }
+
+    // bool operator==(const uint128_t &rhs) const
+    // {
+    //     return ((UPPER == rhs.UPPER) && (LOWER == rhs.LOWER));
+    // }
+
+    pair<uint128_t, uint32_t> divmod(const uint32_t &divisor) const
+    {
+        if (divisor == 0)
+            throw domain_error("Error: division or modulus by 0");
+        else if (divisor == 1)
+            return pair<uint128_t, uint32_t>(*this, 0);
+        
+        uint64_t q[4] = {UPPER >> 32, UPPER & 0xffffffff, LOWER >> 32, LOWER & 0xffffffff};
+        uint64_t d, r = 0;
+        for (int i = 0; i < 4; ++i)
+        {
+            d = (r << 32) + q[i];
+            q[i] = d / divisor;
+            r = d % divisor;
+        }
+        return pair<uint128_t, uint32_t>(uint128_t((q[0] << 32) | q[1], (q[2] << 32) | q[3]), (uint32_t)r);
+    }
+
+    operator bool() const { return (bool)(UPPER | LOWER); }
+    bool operator!() const { return !(bool)(UPPER | LOWER); }
+
+    string str(const uint32_t base = 10) const
+    {
+        if ((base < 2) || (base > 16))
+            throw invalid_argument("Base must be in the range [2, 16]");
+        
+        if (!(*this)) return "0";
+        string out = "";
+        pair<uint128_t, uint32_t> qr(*this, 0);
+        do
+        {
+            qr = qr.first.divmod(base);
+            out = "0123456789abcdef"[qr.second] + out;
+        } while (qr.first);
+        return out;
+    }
+
+    uint128_t operator<<(const int &shift) const
+    {
+        if (shift < 0)
+            return *this >> -shift;
+        else if (shift == 0)
             return *this;
         else if (shift < 64)
             return uint128_t((UPPER << shift) + (LOWER >> (64 - shift)),
@@ -87,18 +93,20 @@ class uint128_t
         else if (shift < 128)
             return uint128_t(LOWER << (shift - 64), 0);
         else
-            return uint128_0;
+            return uint128_t(0);
     }
 
-    uint128_t &operator<<(const uint32_t &shift) const
+    uint128_t & operator<<=(const int &shift)
     {
         *this = *this << shift; 
         return *this; 
     }
 
-    uint128_t operator>>(const uint32_t &shift) const
+    uint128_t operator>>(const int &shift) const
     {
-        if (shift == 0)
+        if (shift < 0)
+            return *this << -shift;
+        else if (shift == 0)
             return *this;
         else if (shift < 64)
             return uint128_t(UPPER >> shift,
@@ -108,27 +116,33 @@ class uint128_t
         else if (shift < 128)
             return uint128_t(0, (UPPER >> (shift - 64)));
         else
-            return uint128_0;
+            return uint128_t(0);
     }
 
-    uint128_t &operator>>=(const uint32_t &shift) const
+    uint128_t & operator>>=(const int &shift)
     {
         *this = *this >> shift;
         return *this;
     }
 
-    ostream & operator<<(ostream &stream, const uint128_t &rhs)
-    {
-        return stream;
-    }
+};
 
-
-
+ostream &operator<<(ostream &stream, const uint128_t &rhs)
+{
+    stream << rhs.str();
+    return stream;
 }
 
+uint128_t max_num(const uint128_t &a, const uint128_t &b) { return a > b ? a : b; }
+typedef pair<uint128_t, uint32_t> QR;
 
 int main()
 {
-    uint128_t a = 0, b = 1;
+    uint128_t a = 100, b = 33;
+
+    QR qr = a.divmod(33);
+
+    cout << qr.first << endl;
+
     cout << a + b << endl;
 }
