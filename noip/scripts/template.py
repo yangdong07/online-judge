@@ -1,7 +1,10 @@
 
 import os
 
-from .filepath import cpp_relative_path_from_solution
+from urllib.parse import quote
+
+from scripts.database import *
+from scripts.filepath import *
 
 
 '''
@@ -14,18 +17,8 @@ from .filepath import cpp_relative_path_from_solution
 { "_id" : "提高+/省选-", "count" : 903 }
 { "_id" : "普及-", "count" : 315 }
 '''
-LEVELS = {
-    '尚无评定': 0,
-    '入门难度': 1,
-    '普及-': 2,
-    '普及/提高-': 3,
-    '普及+/提高': 4,
-    '提高+/省选-': 5,
-    '省选/NOI-': 6,
-    'NOI/NOI+/CTSC': 7,
-}
 
-luogu_template_md = """
+TEMPLATE_SOLUTION = """
 ### {index} {title}
 
 {abstract}
@@ -35,7 +28,7 @@ luogu_template_md = """
 #### [Code]({code_link})\n\n
 """
 
-luogu_template_cpp = """
+TEMPLATE_CPP = """
 // {index} {title}
 // {problem_link}
 
@@ -47,10 +40,17 @@ int main()
 }
 """
 
+TEMPLATE_INDEX_TABLE = """
+## {level}
+
+{solved} / {count}
+
+{table}
+"""
 
 
 def make_cpp_template(problem):
-    return luogu_template_cpp.format(index=problem['index'],
+    return TEMPLATE_CPP.format(index=problem['index'],
                                      title=problem['title'],
                                      problem_link=problem['problem_link'])
 
@@ -65,10 +65,39 @@ def make_solution_template(problem):
         abstract += '其他标签: ' + ', '.join(map(lambda x: '**' + x + '**', tags)) + '\n'
 
     relative_code_link = cpp_relative_path_from_solution(problem['index'])
-    return luogu_template_md.format(index=problem['index'],
+    return TEMPLATE_SOLUTION.format(index=problem['index'],
                                     title=problem['title'],
                                     abstract=abstract,
                                     code_link=relative_code_link)
+
+
+def make_problem_item(problem):
+    index = problem['index']
+    marked = '⭐️' if problem['marked'] else ''
+    # avoid '|' in markdown table
+    problem_link = '%s[%s](%s)' % (marked, problem['title'].replace('|', '-'), problem['problem_link'])
+
+    algorithm_tags = problem.get('algorithm_tags', [])
+    tags = [t for t in problem.get('tags', {}).values() if t not in algorithm_tags]
+
+    solution_link = ''
+    code_link = ''
+    if problem.get('solved'):
+        solution_link = solution_relative_path_from_index_table(index, problem['title'])
+        solution_link = '[📜](%s)' % quote(solution_link)
+        code_link = cpp_relative_path_from_index_table(index)
+        code_link = '[C++](%s)' % quote(code_link)
+
+    return '|'.join([
+        '',
+        index,
+        problem_link,
+        ','.join(algorithm_tags),
+        ','.join(tags),
+        solution_link,
+        code_link,
+        '',
+    ])
 
 
 def make_index_table(problems):
@@ -83,32 +112,33 @@ def make_index_table(problems):
     table.append("|".join(markers))
 
     for problem in problems:
-        index = problem['index']
-        marked = '⭐️' if problem['marked'] else ''
-        # avoid '|' in markdown table
-        problem_link = '%s[%s](%s)' % (marked, problem['title'].replace('|', '-'), problem['problem_link'])
+        table.append(make_problem_item(problem))
 
-        algorithm_tags = problem.get('algorithm_tags', [])
-        tags = [t for t in problem.get('tags', {}).values() if t not in algorithm_tags]
-
-        solution_link = ''
-        code_link = ''
-        if problem.get('solved'):
-            solution_link = '[📜](../solutions/%s)' % quote('.'.join([index, problem['title'], 'md']))
-            code_link = '[C++](../cpp/%s)' % quote('.'.join([index.lower(), 'cpp']))
-        content = [
-            '',
-            index,
-            problem_link,
-            ','.join(algorithm_tags),
-            ','.join(tags),
-            solution_link,
-            code_link,
-            '',
-        ]
-        table.append("|".join(content))
-
-    return table
+    return '\n'.join(table)
 
 
-def make_
+def make_index_table_content(level):
+    problems = db_luogu.find({'level': level})
+    count = db_luogu.count({'level': level})
+    solved = db_luogu.count({'level': level, 'solved': True})
+    table = make_index_table(problems)
+    return TEMPLATE_INDEX_TABLE.format(level=level, count=count, solved=solved, table=table)
+
+
+def update_index_table():
+    levels = db_luogu.aggregate([{"$group": {"_id": "$level", "count": {"$sum": 1}}}])
+    levels = [l['_id'] for l in levels]
+
+    for l in levels:
+        if l not in LEVELS:
+            raise Exception('level not match, please check it, %s' % l)
+
+    levels.sort(key=lambda l: LEVELS[l])
+
+    print(levels)
+
+    for level in levels:
+        text = make_index_table_content(level)
+        # print(text)
+        with open(index_file_path(level), 'w') as f:
+            f.write(text)

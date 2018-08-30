@@ -2,6 +2,7 @@
 import fire
 
 from scripts.filepath import fix_file_path
+from scripts.template import update_index_table
 
 
 class LuoGuProblem(object):
@@ -34,6 +35,9 @@ class LuoGuFixer(object):
     def structure(self):
         print("fix structure")
         fix_file_path()
+
+    def update_index(self):
+        update_index_table()
 
 
 class LuoGuCLI(object):

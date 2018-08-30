@@ -14,8 +14,8 @@ def init_db():
 
 
 client = MongoClient('localhost', 27017)
-db = client.spider[COLLECTION_NAME]
+db_luogu = client.spider[COLLECTION_NAME]
 
 
 def get_problem(index):
-    return db.find({'index': index})
+    return db_luogu.find({'index': index})
