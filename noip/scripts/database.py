@@ -18,4 +18,4 @@ db_luogu = client.spider[COLLECTION_NAME]
 
 
 def get_problem(index):
-    return db_luogu.find({'index': index})
+    return db_luogu.find_one({'index': index})

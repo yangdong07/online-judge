@@ -34,11 +34,15 @@ def cpp_file_name(index):
 
 
 def subdir(index):
-    if index[0] == 'P':  # luogu normal problem starts with P
+    if index[0] == 'P' or index[0] == 'p':  # luogu normal problem starts with P
         sub_index = int(index[1:5]) // 100    # max 100 files per sub dir
         return str(sub_index)
     else:
         return 'others'  # TODO
+
+
+def test_data_path(index):
+    return os.path.join('data', subdir(index), index.lower() + '.yaml')
 
 
 def cpp_save_path(index):
@@ -71,8 +75,31 @@ def solution_relative_path_from_index_table(index, raw_name):
 
 def list_files(path):
     all_path = [os.path.join(path, f) for f in os.listdir(path)]
-    print(all_path)
+    # print(all_path)
     return list(filter(lambda f: os.path.isfile(f), all_path))
+
+
+def move_tmp_files(index):
+    # move tmp files to save path
+    all_files = os.listdir('.')
+    tmp_files = filter(lambda x: x.lower().startswith(index.lower()), all_files)
+    # print(list(tmp_files))
+
+    move_to = {}
+    for f in tmp_files:
+        if f.endswith('.md'):
+            move_to[f] = solution_save_path(index.upper(), f[len(index) + 1:-3])
+        elif f.endswith('.cpp'):
+            move_to[f] = cpp_save_path(index)
+
+    if move_to:
+        print('Plan to Move:\n')
+        for src, dst in move_to.items():
+            print('\t %s ---> %s' % (src, dst))
+        input('\nReady to Move?')
+
+        for src, dst in move_to.items():
+            shutil.move(src, dst)
 
 
 def fix_file_path():

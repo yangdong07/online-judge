@@ -6,60 +6,83 @@ import subprocess
 
 from yaml import load, dump
 
+from scripts.filepath import cpp_file_name, test_data_path
 
-def compile_and_test(index):
 
-    code_file = index.lower() + '.cpp'
-    output_bin = 'test.out'
+output_bin = 'test.out'
 
-    # compile
-    result = subprocess.run('g++ -o {o} {src}'.format(src=code_file, o=output_bin), shell=True)
+TEST_OUTPUT_TEMPLATE = """
+=========== Test Case {_id} ===========
+# input
+{_input}
+# expect
+{_expect}
+# ouptut
+{_output}
+# error
+{_error}
+# time used = {time_used}
+=========== Test {status} =============
+"""
+
+
+def compress_text(text):
+    if len(text) < 200:
+        return text
+    return '\n'.join([text[:100], '...', text[-100:]])
+
+
+def gcc_compile(cpp_file):
+    result = subprocess.run('g++ {src} -o {o}'.format(src=cpp_file, o=output_bin), shell=True)
     if result.returncode != 0:
         exit(result.returncode)
 
-    # test
-    test_data_path = os.path.join('./data', '%s.yaml' % index.lower())
-    if not os.path.exists(test_data_path):
-        warnings.warn('no test case in this problem, please check it <%s>' % index)
-        result = subprocess.run('./%s' % output_bin)
-        return
 
-    with open(test_data_path) as f:
+def load_test_data(index):
+    test_file = test_data_path(index)
+    if not os.path.exists(test_file):
+        raise Exception('no test case in this problem, please check it <%s>' % index)
+
+    with open(test_file, 'r') as f:
         test_case = load(f)
 
-    time_used = []
-    for i, case in enumerate(reversed(test_case), 1):
-        start_time = time.time()
-        result = subprocess.run('./%s' % output_bin,
-                                input=bytearray(case['i'], 'ascii'),
-                                stdout=subprocess.PIPE,
-                                stderr=subprocess.PIPE)
-        output = result.stdout.decode('ascii')
-        error = result.stderr.decode('ascii')
-        # sometimes there will have a '\n' at end;
-        with open('test.output', 'w') as f:
-            f.write(output)
-        time_used.append(time.time() - start_time)
-        if output != case['o'] and output != case['o'] + '\n':
-            print('=' * 10 + ' Test Case #%s ' % i + '=' * 10)
-            print('#input')
-            print(case['i'])
-            print('#expect')
-            print(case['o'])
-            print('#output')
-            print(output)
-            print(error)
-            print('=' * 10 + ' Test Failed ' + '=' * 10)
-            print('time used: %.3f s' % time_used[-1])
-            exit(1)
-    print(time_used)
-    # for t in time_used:
-    #     print('time used: %.3f s' % t)
-    print('All Passed, Congratulations!')
+    return test_case
+
+
+def test(data):
+    start_time = time.time()
+    result = subprocess.run('./%s' % output_bin,
+                            input=bytearray(data, 'ascii'),
+                            stdout=subprocess.PIPE,
+                            stderr=subprocess.PIPE)
+    output = result.stdout.decode('ascii').strip()
+    error = result.stderr.decode('ascii')
+    return output, error, time.time() - start_time
+
+
+def compile_and_test(index, _id=None):
+    cpp_file = cpp_file_name(index)
+
+    gcc_compile(cpp_file)
+
+    test_data = load_test_data(index)
+
+    all_passed = True
+    for i, data in enumerate(test_data, 1):
+        output, error, time_used = test(data['i'])
+        status = 'Failed' if output.strip() != data['o'].strip() else 'Success'
+        if status == 'Failed':
+            all_passed = False
+        print(TEST_OUTPUT_TEMPLATE.format(_id=i, _input=compress_text(data['i']),
+                                          _expect=data['o'],
+                                          _output=output, status=status,
+                                          _error=error, time_used=time_used))
+    if all_passed:
+        print('All Passed, Congratulations!')
 
 
 def add_test_case(index):
-    test_data_path = os.path.join('./data', '%s.yaml' % index.lower())
+    test_file = test_data_path(index)
     if not os.path.exists(test_data_path):
         warnings.warn('no test case in this problem, please check it <%s>' % index)
 
