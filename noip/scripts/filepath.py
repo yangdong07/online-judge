@@ -41,8 +41,16 @@ def subdir(index):
         return 'others'  # TODO
 
 
+def test_data_dir(index):
+    return os.path.join('data', subdir(index))
+
+
 def test_data_path(index):
     return os.path.join('data', subdir(index), index.lower() + '.yaml')
+
+
+def cpp_save_dir(index):
+    return os.path.join('cpp', subdir(index))
 
 
 def cpp_save_path(index):
@@ -51,6 +59,10 @@ def cpp_save_path(index):
 
 def solution_file_name(index, raw_name):
     return regular_file(index, raw_name, suffix='.md')
+
+
+def solution_save_dir(index):
+    return os.path.join('solutions', subdir(index))
 
 
 def solution_save_path(index, raw_name):
@@ -84,6 +96,7 @@ def move_tmp_files(index):
     all_files = os.listdir('.')
     tmp_files = filter(lambda x: x.lower().startswith(index.lower()), all_files)
     # print(list(tmp_files))
+
 
     move_to = {}
     for f in tmp_files:

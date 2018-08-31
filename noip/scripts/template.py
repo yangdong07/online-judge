@@ -182,6 +182,12 @@ def generate_templates(index):
     if not problem:
         raise Exception('problem <%s> not found in db' % index)
 
+    dirs = [cpp_save_dir(index), solution_save_dir(index), test_data_dir(index)]
+
+    for d in dirs:
+        if not os.path.exists(d):
+            os.mkdir(d)
+
     generate_solution_file(problem)
     generate_cpp_file(problem)
     generate_test_data(problem)
