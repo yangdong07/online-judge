@@ -4,7 +4,7 @@ import fire
 from scripts.filepath import fix_file_path, move_tmp_files
 from scripts.spider import fetch_raw_problem
 from scripts.template import generate_index_table, generate_templates
-from scripts.autotest import compile_and_test
+from scripts.autotest import compile_and_test, add_test_example
 from scripts.utils import solved_and_commit
 
 
@@ -37,6 +37,9 @@ class LuoGuProblem(object):
         print("git commit {index}".format(index=self._problem))
         move_tmp_files(self._problem)
         solved_and_commit(self._problem)
+
+    def ta(self):
+        add_test_example(self._problem)
 
 
 class LuoGuFixer(object):

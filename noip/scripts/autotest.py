@@ -81,10 +81,8 @@ def compile_and_test(index, _id=None):
         print('All Passed, Congratulations!')
 
 
-def add_test_case(index):
-    test_file = test_data_path(index)
-    if not os.path.exists(test_data_path):
-        warnings.warn('no test case in this problem, please check it <%s>' % index)
+def add_test_example(index):
+    test_data_file = test_data_path(index)
 
     with open('./testdata.in') as f:
         i = f.read()
@@ -92,12 +90,15 @@ def add_test_case(index):
     with open('./testdata.out') as f:
         o = f.read()
 
-    with open(test_data_path) as f:
-        test_case = load(f)
-        test_case.append({'i': i, 'o': o})
+    test_examples = [{'i': i, 'o': o}]
 
-    with open(test_data_path, 'w') as f:
-        dump(test_case, f)
+    if os.path.exists(test_data_file):
+        with open(test_data_file) as f:
+            test_examples.extend(load(f))
+    print(test_examples)
+
+    with open(test_data_file, 'w') as f:
+        dump(test_examples, f)
 
 
 def solved_and_commit(index):
