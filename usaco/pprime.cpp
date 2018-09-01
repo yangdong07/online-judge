@@ -1,12 +1,25 @@
-// P1217 [USACO1.5]回文质数 Prime Palindromes
-// https://www.luogu.org/problemnew/show/P1217
+/*
+ID: yesimim1
+TASK: pprime
+LANG: C++
 
+#include <cstdio>
+    FILE *fin = fopen ("pprime.in", "r");
+    FILE *fout = fopen ("pprime.out", "w");
 
+#include <fstream>
+    ofstream fout ("pprime.out");
+    ifstream fin ("pprime.in");
+*/
+
+#include <fstream>
 #include <iostream>
 
 using namespace std;
 
 int a, b;
+ofstream fout("pprime.out");
+ifstream fin("pprime.in");
 
 int is_prime(int n)
 {
@@ -39,18 +52,19 @@ void prime_palindrome(int digits)
             {
                 p = palindrome(i, j);
                 if (is_prime(p) && p >= a && p <= b)
-                    cout << p << endl;
+                    fout << p << endl;
             }
     }
     else if (digits == 2)
         if (a <= 11 && 11 <= b)
-            cout << 11 << endl;
+            fout << 11 << endl;
 }
 
 
 int main()
 {
-    cin >> a >> b;
+
+    fin >> a >> b;
 
     int ad = 0, bd = 0;
     for (int t = a; t; t /= 10) ++ad;
@@ -61,7 +75,7 @@ int main()
     {
         for (int i = a; i < 10; ++i)
             if (is_prime(i))
-                cout << i << endl;
+                fout << i << endl;
         ad = 2;
     }
 
