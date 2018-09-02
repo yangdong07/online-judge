@@ -20,8 +20,9 @@ LANG: C++
 def replace_io(s):
     return s.replace("cin", "fin") \
             .replace("cout", "fout") \
+            .replace("getchar()", "fgetc(fin)")
             .replace("scanf(", "fscanf(fin, ") \
-            .replace("printf(", "fprintf(fout, ")
+            .replace("printf(", "fprintf(fout, ") \
 
 
 def replace_task(s, task):

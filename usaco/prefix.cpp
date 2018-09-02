@@ -1,13 +1,22 @@
+/*
+ID: yesimim1
+TASK: prefix
+LANG: C++
 
-// P1470 最长前缀 Longest Prefix
-// https://www.luogu.org/problemnew/show/P1470
+#include <cstdio>
+
+#include <fstream>
+    ofstream fout ("prefix.out");
+    ifstream fin ("prefix.in");
+*/
 
 #include <cstdio>
 #include <cctype>
 #include <cstring>
 
-const int MAX_N = 200001;
-const int MAX_M = 201;
+
+const int MAX_N = 200010;
+const int MAX_M = 300;
 
 int n, m;
 
@@ -31,7 +40,7 @@ bool check_back(int cur)
         if (cur >= wl[i] - 1 && dp[cur - wl[i] + 1] &&
             strncmp(&s[cur - wl[i] + 1], dict[i], wl[i]))
             {
-                // printf("%d: match: %s\n", cur, dict[i]);
+                // fprintf(fout, "%d: match: %s\n", cur, dict[i]);
                 return true;
             }
     }
@@ -40,23 +49,28 @@ bool check_back(int cur)
 
 int main()
 {
+    FILE *fin = fopen("prefix.in", "r");
+    FILE *fout = fopen("prefix.out", "w");
+
     int i;
     for (i = 0;; ++i)
     {
-        scanf("%s", dict[i]);
+        fscanf(fin, "%s", dict[i]);
         if (dict[i][0] == '.') break;
         wl[i] = strlen(dict[i]);
     }
     m = i;
 
     // for (i = 0; i < m; ++i)
-    //     printf("%2d: %s\n", wl[i], dict[i]);
+    //     fprintf(fout, "%2d: %s\n", wl[i], dict[i]);
 
     i = 0;
-    for (char c = getchar(); c != EOF; c = getchar())
+    for (char c = fgetc(fin); c != EOF; c = fgetc(fin))
         if (isalpha(c)) s[i++] = c;
     n = i;
 
+    for (i = 0; i <= n; ++i)
+        dp[i] = false;
     dp[0] = true;
     for (i = 0; i < n; ++i)
         dp[i + 1] = check_back(i);
@@ -64,7 +78,7 @@ int main()
     for (i = n; i >= 0; --i)
         if (dp[i]) break;
 
-    printf("%d\n", i);
+    fprintf(fout, "%d\n", i);
 
     return 0;
 }
