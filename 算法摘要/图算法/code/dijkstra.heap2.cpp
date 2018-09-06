@@ -1,6 +1,12 @@
 
-// P3371 【模板】单源最短路径（弱化版）
-// https://www.luogu.org/problemnew/show/P3371
+/*
+    dijkstra algorithm
+    1. graph: adj list, use vector
+    2. use min heap.
+    3. static array.
+    
+    please use luogu p4779 test examples
+*/
 
 #include <cstdio>
 #include <cstdlib>
@@ -11,21 +17,18 @@ using namespace std;
 
 typedef pair<int, int> adj;
 
+const int MAX_N = 100000;
 const int INF = 0x7fffffff;
 
 struct Graph
 {
     int n;  // number of vertices
-    vector<adj> *adjs;
-    Graph(int n): n(n)
-    {
-        adjs = (vector<adj>*) calloc(n, sizeof(vector<adj>));
-    }
+    vector<adj> adjs[MAX_N];
+    Graph(int n): n(n) {}
 
     void add_edge(int u, int v, int weight)
     {
         adjs[u].push_back(make_pair(v, weight));
-        // adjs[v].push_back(make_pair(u, weight));
     }
 
 };
@@ -35,16 +38,11 @@ struct MinHeap
 {
     int size;
     int capacity;
-    int *heap;   // [keys]
-    int *keys;   // [heap index]
-    int *values; // shortest path estimate, int? T?
+    int heap[MAX_N];
+    int keys[MAX_N];
+    int values[MAX_N];
 
-    MinHeap(int n): size(n), capacity(n)
-    {
-        heap = (int *)calloc(n, sizeof(int));
-        keys = (int *)calloc(n, sizeof(int));
-        values = (int *)calloc(n, sizeof(int));
-    }
+    MinHeap(int n) : size(n), capacity(n) {}
 
     void _swap(int i1, int i2)
     {
@@ -102,22 +100,6 @@ struct MinHeap
             i = j;
         }
     }
-    
-    void print_heap()
-    {
-        for (int i = 0; i < size; ++i)
-            printf("%-5d", heap[i]);
-        printf("\n");
-        for (int i = 0; i < size; ++i)
-        {
-            if (values[heap[i]] != INF)
-                printf("%-5d", values[heap[i]]);
-            else
-                printf("%-5s", "INF");
-        }
-        printf("\n");
-    }
-
 };
 
 
@@ -172,10 +154,10 @@ int main()
         g.add_edge(i - 1, j - 1, weight);
     }
 
-    int *dist = (int *)malloc(n * sizeof(int));
+    int dist[MAX_N];
     dijkstra(g, src - 1, dist);
 
-    for (int i = 0; i < n; ++i)
+    for (i = 0; i < n; ++i)
         printf("%d ", dist[i]);
 
     return 0;

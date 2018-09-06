@@ -1,6 +1,12 @@
 
-// P3371 【模板】单源最短路径（弱化版）
-// https://www.luogu.org/problemnew/show/P3371
+/*
+    dijkstra algorithm
+    1. graph: adj list, use vector
+    2. use min heap.
+    3. dynamic allocate memory.
+
+    please use luogu p4779 test examples
+*/
 
 #include <cstdio>
 #include <cstdlib>
@@ -103,21 +109,20 @@ struct MinHeap
         }
     }
     
-    void print_heap()
-    {
-        for (int i = 0; i < size; ++i)
-            printf("%-5d", heap[i]);
-        printf("\n");
-        for (int i = 0; i < size; ++i)
-        {
-            if (values[heap[i]] != INF)
-                printf("%-5d", values[heap[i]]);
-            else
-                printf("%-5s", "INF");
-        }
-        printf("\n");
-    }
-
+    // void print_heap()
+    // {
+    //     for (int i = 0; i < size; ++i)
+    //         printf("%-5d", heap[i]);
+    //     printf("\n");
+    //     for (int i = 0; i < size; ++i)
+    //     {
+    //         if (values[heap[i]] != INF)
+    //             printf("%-5d", values[heap[i]]);
+    //         else
+    //             printf("%-5s", "INF");
+    //     }
+    //     printf("\n");
+    // }
 };
 
 
@@ -175,7 +180,7 @@ int main()
     int *dist = (int *)malloc(n * sizeof(int));
     dijkstra(g, src - 1, dist);
 
-    for (int i = 0; i < n; ++i)
+    for (i = 0; i < n; ++i)
         printf("%d ", dist[i]);
 
     return 0;
