@@ -15,6 +15,10 @@
 
 using namespace std;
 
+const int INF = 0x7fffffff;
+const int MAX_V = 100000;
+const int MAX_E = 200000;
+
 struct edge
 {
     int v, w, next;
@@ -29,10 +33,6 @@ struct vertex
         return d > b.d;   // min first, max last
     }
 };
-
-const int INF = 0x7fffffff;
-const int MAX_V = 100000;
-const int MAX_E = 200000;
 
 int size;
 int heap[MAX_V];

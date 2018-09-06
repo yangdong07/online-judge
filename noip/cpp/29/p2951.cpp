@@ -1,16 +1,6 @@
 
-/*
-    dijkstra algorithm
-    no vector
-    1. graph: edges, use array list
-    2. vertices: shortest path estimate
-    3. use priority queue
-
-    please use luogu p4779 test examples
-    比实现二叉堆的性能略差一些，但是贵在写起来方便。这应该是综合考虑最优的版本。
-    806ms，O2优化： 188ms
-*/
-
+// P2951 [USACO09OPEN]捉迷藏Hide and Seek
+// https://www.luogu.org/problemnew/show/P2951
 
 #include <cstdio>
 #include <queue>
@@ -18,15 +8,15 @@
 using namespace std;
 
 const int INF = 0x7fffffff;
-const int MAX_V = 100000;
-const int MAX_E = 200000;
+const int MAX_V = 20000;
+const int MAX_E = 100000;
 
-struct edge 
+struct edge
 {
     int v, w, next;
 };
 
-struct vertex 
+struct vertex
 {
     int v, d;
     vertex(int v, int d) : v(v), d(d) {}
@@ -62,7 +52,7 @@ void dijkstra(int src, int dist[], int n)
         i = pq.top().v;
         spe = pq.top().d;
         pq.pop();
-        if (spe != dist[i]) continue;
+        if (spe > dist[i]) continue;
         for (k = head[i]; k; k = edges[k].next)
         {
             j = edges[k].v;
@@ -87,24 +77,35 @@ void read_num(int &num)
 
 int main()
 {
-    int n, m, src, i, j, k, weight;
+    int n, m, i, j, k;
     read_num(n);
     read_num(m);
-    read_num(src);
 
     for (k = 0; k < m; ++k)
     {
         read_num(i);
         read_num(j);
-        read_num(weight);
-        add_edge(i - 1, j - 1, weight);
+        add_edge(i - 1, j - 1, 1);
+        add_edge(j - 1, i - 1, 1);
     }
 
     int dist[MAX_V];
-    dijkstra(src - 1, dist, n);
+    dijkstra(0, dist, n);
 
+    int max_i = 0, max_d = 0, total;
     for (i = 0; i < n; ++i)
-        printf("%d ", dist[i]);
+    {
+        // printf("%d ", dist[i]);
+        if (max_d < dist[i])
+        {
+            max_d = dist[i];
+            max_i = i;
+            total = 1;
+        }
+        else if (max_d == dist[i])
+            ++total;
+    }
+    printf("%d %d %d\n", max_i + 1, max_d, total);
 
     return 0;
 }
