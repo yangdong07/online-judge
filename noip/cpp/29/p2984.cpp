@@ -1,16 +1,6 @@
 
-/*
-    dijkstra algorithm
-    no vector
-    1. graph: edges, use array list
-    2. vertices: shortest path estimate
-    3. use priority queue
-
-    please use luogu p4779 test examples
-    比实现二叉堆的性能略差一些，但是贵在写起来方便。这应该是综合考虑最优的版本。
-    806ms，O2优化： 188ms
-*/
-
+// P2984 [USACO10FEB]给巧克力Chocolate Giving
+// https://www.luogu.org/problemnew/show/P2984
 
 #include <cstdio>
 #include <queue>
@@ -18,8 +8,8 @@
 using namespace std;
 
 const int INF = 0x7fffffff;
-const int MAX_V = 100000;
-const int MAX_E = 200000;
+const int MAX_V = 50000;
+const int MAX_E = 100000 * 2;
 
 struct edge 
 {
@@ -87,10 +77,10 @@ void read_num(int &num)
 
 int main()
 {
-    int n, m, src, i, j, k, weight;
+    int n, m, b, i, j, k, weight;
     read_num(n);
     read_num(m);
-    read_num(src);
+    read_num(b);
 
     for (k = 0; k < m; ++k)
     {
@@ -98,13 +88,17 @@ int main()
         read_num(j);
         read_num(weight);
         add_edge(i - 1, j - 1, weight);
+        add_edge(j - 1, i - 1, weight);
     }
 
     int dist[MAX_V];
-    dijkstra(src - 1, dist, n);
+    dijkstra(0, dist, n);
 
-    for (i = 0; i < n; ++i)
-        printf("%d ", dist[i]);
-
+    for (k = 0; k < b; ++k)
+    {
+        read_num(i);
+        read_num(j);
+        printf("%d\n", dist[i - 1] + dist[j - 1]);
+    }
     return 0;
 }
