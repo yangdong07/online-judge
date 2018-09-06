@@ -17,6 +17,10 @@
 
 using namespace std;
 
+const int INF = 0x7fffffff;
+const int MAX_V = 100000;
+const int MAX_E = 200000;
+
 struct edge // 实际上是一个用数组实现的单向链表
 {
     int v, w, next;
@@ -31,10 +35,6 @@ struct vertex  // 实际上是每个点的最短路径估计，需要加入到 �
         return d > b.d;   // min first, max last
     }
 };
-
-const int INF = 0x7fffffff;
-const int MAX_V = 100000;
-const int MAX_E = 200000;
 
 edge edges[MAX_E + 1];
 int head[MAX_V] = {0}, ec = 0;
