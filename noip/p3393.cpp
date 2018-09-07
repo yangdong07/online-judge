@@ -1,71 +1,73 @@
 
-// P3393 逃离僵尸岛
-// https://www.luogu.org/problemnew/show/P3393
-
 #include <cstdio>
 #include <queue>
-#include <algorithm>
-
+#include <cstring>
 using namespace std;
 
 typedef long long INT64;
 
-const INT64 INF = 0x3ffffffffffffff;
-const int MAX_V = 100000;
+const int MAX_N = 100010;
 const int MAX_E = 200000 * 2;
+const INT64 INF = 0x7ffffffffffff;
 
-struct edge 
+int n, m, n_dead, radius, P, Q;
+
+INT64 dist[MAX_N];
+
+int head[MAX_N], n_edges;
+bool dead[MAX_N], danger[MAX_N];
+
+struct Edge 
 {
     int v, next;
     INT64 w;
 };
 
-struct vertex 
+struct Vertex
 {
     int v;
-    INT64 d;
-    vertex(int v, INT64 d) : v(v), d(d) {}
-    bool operator<(const vertex &b) const
+    INT64 spe;
+    Vertex(int v, INT64 d) : v(v), spe(d) {}
+    bool operator<(const Vertex &b) const
     {
-        return d > b.d;   // min first, max last
+        return spe > b.spe;   // min first, max last
     }
 };
 
-edge edges[MAX_E + 1];
-int head[MAX_V] = {0}, ec = 0;
+Edge edges[MAX_E + 1];
 
-void add_edge(int u, int v, INT64 w)
+void add_edge(int u, int v, INT64 w = 1L)
 {
-    edges[++ec].v = v;
-    edges[ec].w = w;
-    edges[ec].next = head[u];
-    head[u] = ec;
+    edges[++n_edges].v = v;
+    edges[n_edges].w = w;
+    edges[n_edges].next = head[u];
+
+    head[u] = n_edges;
 }
 
-void dijkstra(int src, INT64 dist[], int n)
+
+void dijkstra(int src)
 {
+    queue<Vertex> pq;
     int i, j, k;
-    INT64 spe;
-    for (i = 0; i < n; ++i)
+    for (i = 1; i <= n; ++i)
         dist[i] = INF;
-    priority_queue<vertex> pq;
-
+    
+    pq.push(Vertex(src, 0));
     dist[src] = 0;
-    pq.push(vertex(src, 0));
-
     while (!pq.empty())
     {
-        i = pq.top().v;
-        spe = pq.top().d;
+        Vertex v = pq.front();
         pq.pop();
-        if (spe > dist[i]) continue;
+        i = v.v;
+        if (v.spe > dist[i]) continue;
         for (k = head[i]; k; k = edges[k].next)
         {
             j = edges[k].v;
-            if (dist[i] + edges[k].w < dist[j])
+            if (dist[j] > dist[i] + edges[k].w)
             {
                 dist[j] = dist[i] + edges[k].w;
-                pq.push(vertex(j, dist[j]));
+                pq.push(Vertex(j, dist[j]));
             }
         }
     }
@@ -81,88 +83,51 @@ void read_num(int &num)
         num = num * 10 + c - '0';
 }
 
-
-void bfs(int start, int visit[], int depth)
-{
-    int i, j, k;
-    queue<int> vq;
-    visit[start] = 1;
-    vq.push(start);
-
-    while (!vq.empty())
-    {
-        i = vq.front();
-        vq.pop();
-        if (visit[i] == depth + 1) continue;
-        for (k = head[i]; k; k = edges[k].next)
-        {
-            j = edges[k].v;
-            if (!visit[j])
-            {
-                visit[j] = visit[i] + 1;
-                vq.push(j);
-            }
-        }
-    }
-}
-
-
 int main()
 {
-    int n, m, i, j, k, p, q;
-    int n_dead, radius;
+    scanf("%d%d%d%d", &n, &m, &n_dead, &radius);
+    scanf("%d%d", &P, &Q);
 
-    scanf("%d %d %d %d\n", &n, &m, &n_dead, &radius);
-    scanf("%d %d\n", &p, &q);
-
-    bool dead[MAX_V] = {false};
-    for (k = 0; k < n_dead; ++k)
+    int i, j, k;
+    for (k = 1; k <= n_dead; ++k)
     {
-        scanf("%d", &i);
-        dead[i - 1] = true;
+        read_num(i);
+        dead[i] = 1;
     }
     for (k = 0; k < m; ++k)
     {
         read_num(i);
         read_num(j);
-        add_edge(i - 1, j - 1, 0);
-        add_edge(j - 1, i - 1, 0);
-    }
-
-    // mark danger city
-    int visit[MAX_V] = {0};
-    for (i = 0; i < n; ++i)
+        if (dead[i] && dead[j])
+            continue;
         if (dead[i])
-            bfs(i, visit, radius);
-    
-    // for (i = 0; i < n; ++i)
-    //     printf("%d ", visit[i]);
-    // printf("\n");
-
-    // re assign weights
-    for (i = 0; i < n; ++i)
-    {
-        for (k = head[i]; k; k = edges[k].next)
-        {
-            j = edges[k].v;
-            if (visit[j] == 0)
-                edges[k].w = p;
-            else if (visit[j] == 1)
-                edges[k].w = INF;
-            else
-                edges[k].w = q;
-            if (j == 0 || j == n - 1)
-                edges[k].w = 0;
-        }
+            add_edge(0, j), add_edge(j, 0);
+        else if (dead[j])
+            add_edge(0, i), add_edge(i, 0);
+        else
+            add_edge(i, j), add_edge(j, i);
     }
 
-    INT64 dist[MAX_V];
-    dijkstra(0, dist, n);
+    dijkstra(0);
+    for (i = 1; i <= n; ++i)
+        if (dist[i] <= radius)
+            danger[i] = 1;
 
-    printf("%lld\n", dist[n - 1]);
-    // for (i = 0; i < n; ++i)
-    //     printf("%lld ", dist[i]);
-    // printf("%d", dist[dst - 1]);
+    for (i = 1; i <= n_edges; ++i)
+    {
+        if (danger[edges[i].v])
+            edges[i].w = Q;
+        else if (dead[edges[i].v])
+            edges[i].w = INF;
+        else
+            edges[i].w = P;
+
+        if (edges[i].v == 1 || edges[i].v == n)
+            edges[i].w = 0;
+
+    }
+    dijkstra(1);
+    printf("%lld\n", dist[n]);
 
     return 0;
 }
