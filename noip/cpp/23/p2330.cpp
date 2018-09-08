@@ -1,13 +1,7 @@
 
+// P2330 [SCOI2005]繁忙的都市
+// https://www.luogu.org/problemnew/show/P2330
 
-/*
-    Minimum Spanning Tree - Kruskal algorithm
-
-    Luogu P3366 评测结果 ：193ms 
-
-    感觉上 Prim 和Kruskal 区别不大。 但是 Kruskal 写起来更简练一些。
-    同时需要注意的是， Kruskal 的边保存方式与一般图题不一样， 存边的时候更省空间。
-*/
 
 
 #include <cstdio>
@@ -15,7 +9,7 @@
 
 using namespace std;
 
-const int MAX_N = 5000;
+const int MAX_N = 301;
 // const int MAX_E = 200000;
 
 struct DisjointSet
@@ -41,19 +35,6 @@ struct DisjointSet
     {
         return find(x) == find(y);
     }
-    int size()
-    {
-        int _size = 0;
-        for (int i = 1; i <= n; ++i)
-            if (s[i] == i) ++_size;
-        return _size;
-    }
-    void print()
-    {
-        for (int i = 1; i <= n; ++i)
-            printf("%d ", s[i]);
-        printf("\n");
-    }
 };
 
 struct Edge
@@ -69,7 +50,7 @@ struct Edge
 int mst_kruskal(DisjointSet &dset, Edge *edges, int m)
 {
     int i, j, k;
-    int min_cost = 0;
+    int max_edge = 0;
 
     sort(edges, edges + m);
     for (k = 0; k < m; ++k)
@@ -78,11 +59,11 @@ int mst_kruskal(DisjointSet &dset, Edge *edges, int m)
         j = edges[k].v;
         if (!dset.equivalent(i, j))
         {
-            min_cost += edges[k].w;
+            max_edge = edges[k].w;
             dset.unite(i, j);
         }    
     }
-    return min_cost;
+    return max_edge;
 }
 
 void read_num(int &num)
@@ -113,8 +94,7 @@ int main()
         read_num(edges[i].w);
     }
 
-    int min_cost = mst_kruskal(dset, edges, m, min_cost);
-    printf("%d\n", min_cost);
+    int max_edge = mst_kruskal(dset, edges, m);
+    printf("%d %d\n", n - 1, max_edge);
     return 0;
 }
-
