@@ -14,7 +14,6 @@ int n, m, n_dead, radius, P, Q;
 
 INT64 dist[MAX_N];
 
-int head[MAX_N], n_edges;
 bool dead[MAX_N], danger[MAX_N];
 
 struct Edge 
@@ -34,7 +33,13 @@ struct Vertex
     }
 };
 
-Edge edges[MAX_E + 1];
+struct Graph
+{
+    int head[MAX_N], n_edges;
+    Edge edges[MAX_E + 1];
+
+}
+
 
 void add_edge(int u, int v, INT64 w = 1L)
 {

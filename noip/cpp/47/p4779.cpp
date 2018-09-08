@@ -40,9 +40,8 @@ void add_edge(int u, int v, int w)
 void dijkstra(int src, int dist[], int n)
 {
     int i, j, k;
-    bool visit[MAX_V];
     for (i = 0; i < n; ++i)
-        dist[i] = INF, visit[i] = false;
+        dist[i] = INF;
     priority_queue<vertex> pq;
 
     dist[src] = 0;
@@ -50,11 +49,10 @@ void dijkstra(int src, int dist[], int n)
 
     while (!pq.empty())
     {
-        i = pq.top().v;
+        vertex v = pq.top();
         pq.pop();
-
-        if (visit[i]) continue;
-        visit[i] = true;
+        if (v.d > dist[v.v]) continue;
+        i = v.v;
         // if (spe > dist[i]) continue;
         for (k = head[i]; k; k = edges[k].next)
         {
