@@ -3,6 +3,8 @@
 /*
     Minimum Spanning Tree - Prim algorithm
 
+    使用 优先级队列实现。
+
     Luogu P3366 评测结果 ： 200ms
 */
 

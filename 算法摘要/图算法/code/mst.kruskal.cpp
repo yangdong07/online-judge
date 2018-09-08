@@ -15,15 +15,14 @@
 
 using namespace std;
 
-const int MAX_N = 5000;
-// const int MAX_E = 200000;
 
 struct DisjointSet
 {
     int n;
-    int s[MAX_N];
+    int *s;
     DisjointSet(int n) : n(n)
     {
+        s = (int *)malloc((n + 1) * sizeof(int));
         for (int i = 0; i <= n; ++i)
             s[i] = i;
     }
@@ -113,7 +112,7 @@ int main()
         read_num(edges[i].w);
     }
 
-    int min_cost = mst_kruskal(dset, edges, m, min_cost);
+    int min_cost = mst_kruskal(dset, edges, m);
     printf("%d\n", min_cost);
     return 0;
 }
