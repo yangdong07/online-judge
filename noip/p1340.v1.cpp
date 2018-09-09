@@ -9,6 +9,7 @@
 
 using namespace std;
 
+
 struct DisjointSet
 {
     int n;
@@ -102,6 +103,7 @@ int main()
     }
 
     // try connect
+
     DisjointSet dset = DisjointSet(n);
     int connected = 1, k_connected;
     for (k_connected = 1; k_connected <= m; ++k_connected)
