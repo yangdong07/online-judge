@@ -9,8 +9,10 @@ TASK: {task}
 LANG: C++
 
 #include <cstdio>
-    FILE *fin = fopen ("{task}.in", "r");
-    FILE *fout = fopen ("{task}.out", "w");
+FILE *fin = fopen ("{task}.in", "r");
+FILE *fout = fopen ("{task}.out", "w");
+
+void _fputc(char c) {{ fputc(c, fout); }}
 
 #include <fstream>
     ofstream fout ("{task}.out");
@@ -22,7 +24,8 @@ def replace_io(s):
             .replace("cout", "fout") \
             .replace("getchar()", "fgetc(fin)") \
             .replace("scanf(", "fscanf(fin, ") \
-            .replace("printf(", "fprintf(fout, ")
+            .replace("printf(", "fprintf(fout, ") \
+            .replace("putchar", "_fputc")
 
 
 def replace_task(s, task):
