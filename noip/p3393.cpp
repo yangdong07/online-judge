@@ -14,6 +14,7 @@ int n, m, n_dead, radius, P, Q;
 
 INT64 dist[MAX_N];
 
+int head[MAX_N], n_edges;
 bool dead[MAX_N], danger[MAX_N];
 
 struct Edge 
@@ -33,15 +34,9 @@ struct Vertex
     }
 };
 
-struct Graph
-{
-    int head[MAX_N], n_edges;
-    Edge edges[MAX_E + 1];
+Edge edges[MAX_E + 1];
 
-}
-
-
-void add_edge(int u, int v, INT64 w = 1L)
+void add_edge(int u, int v, INT64 w)
 {
     edges[++n_edges].v = v;
     edges[n_edges].w = w;
@@ -49,7 +44,6 @@ void add_edge(int u, int v, INT64 w = 1L)
 
     head[u] = n_edges;
 }
-
 
 void dijkstra(int src)
 {
@@ -66,7 +60,7 @@ void dijkstra(int src)
         pq.pop();
         i = v.v;
         if (v.spe > dist[i]) continue;
-        for (k = head[i]; k; k = edges[k].next)
+        for (k = head[v.v]; k; k = edges[k].next)
         {
             j = edges[k].v;
             if (dist[j] > dist[i] + edges[k].w)
@@ -78,16 +72,6 @@ void dijkstra(int src)
     }
 }
 
-void read_num(int &num)
-{
-    char c;
-    num = 0;
-    for (c = getchar(); c < '0' || c > '9'; c = getchar());
-
-    for (; c >= '0' && c <= '9'; c = getchar())
-        num = num * 10 + c - '0';
-}
-
 int main()
 {
     scanf("%d%d%d%d", &n, &m, &n_dead, &radius);
@@ -96,21 +80,20 @@ int main()
     int i, j, k;
     for (k = 1; k <= n_dead; ++k)
     {
-        read_num(i);
+        scanf("%d", &i);
         dead[i] = 1;
     }
     for (k = 0; k < m; ++k)
     {
-        read_num(i);
-        read_num(j);
+        scanf("%d %d", &i, &j);
         if (dead[i] && dead[j])
             continue;
         if (dead[i])
-            add_edge(0, j), add_edge(j, 0);
+            add_edge(0, j, 1), add_edge(j, 0, 1);
         else if (dead[j])
-            add_edge(0, i), add_edge(i, 0);
+            add_edge(0, i, 1), add_edge(i, 0, 1);
         else
-            add_edge(i, j), add_edge(j, i);
+            add_edge(i, j, 1), add_edge(j, i, 1);
     }
 
     dijkstra(0);
