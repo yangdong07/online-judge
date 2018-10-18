@@ -34,12 +34,9 @@ int main()
             cout << "No Solution" << endl;
             return 0;
         }
-        // 先消耗
+
+        // 先消耗，消耗多少，就需要补充多少。
         percent[cur] = 0.0;
-        // cout << endl << "at " << cur << endl;
-        // for (i = 0; i <= n + 1; ++i)
-        //     cout << percent[i] << " ";
-        // cout << endl;
 
         for (i = 0; i < cur; ++i)
         {
@@ -56,32 +53,22 @@ int main()
                 percent[i] = 0.0;
             }
         }
-        // cout << cost << endl;
-        // for (i = 0; i <= n + 1; ++i)
-        //     cout << percent[i] << " ";
-        // cout << endl;
 
-        cost += price[cur] * percent[cur];
-
-        // 再补充。 如果当前价格比之前的低，就换掉。
+        // 再补充。 如果当前价格比之前的低，就退换掉。
         for (i = cur - 1; i >= 0; --i)
         {
             if (price[cur] < price[i])
             {
-                cost -= (price[i] - price[cur]) * percent[i];
+                cost -= price[i] * percent[i];
                 percent[cur] += percent[i];
                 percent[i] = 0.0;
             }
         }
-        // cout << cost << endl;
+
+        // 补充的油
+        cost += price[cur] * percent[cur];
     }
 
-    // // 把所有油都退掉
-    // for (i = 0; i <= n; ++i)
-    // {
-    //     if (percent[i] > 0.0)
-    //         cost -= price[i] * percent[i] * capacity;
-    // }
     printf("%.2lf", cost * capacity);
 
     return 0;
